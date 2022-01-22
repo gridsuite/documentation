@@ -97,7 +97,7 @@ This services is responsible for converting substations and lines GPS coordinate
 - Connected to message broker: no
 - Other services dependencies: network store server
 
-
+This service is responsible for extracting/filtering/reshaping network data from network store, so that it can be used on front-end side to feed to the network map, the spreadsheet and many other components that need to display network data.
 
 ### Network modification server
 
@@ -107,6 +107,8 @@ This services is responsible for converting substations and lines GPS coordinate
 - Connected to message broker: no
 - Other services dependencies: network store server, report server
 
+This service is responsible for storing and applying modification to a network of the network store server. This is one of the most important service of the application as it implements many businness logic for modifying the network. There is many kind of modification supported by this service like network element creation (substation, voltage level, generator, load, etc), network element removal, switch opening or closing, line or transformer triggering or locking out, network element elementary modification (like a target value modification, or a tap position modification). Only a very few number of expected possible modifications have yet been implemented and many more will come in the future. Network modifications have a unique ID (UUID) and could be associated to a group which have itself a unique ID (UUID) and this is how a set of modifications is referenced in the database of other web services. Depending of the use case a network modification can be only stored, can be stored and applied to a network  (given a network ID in the network store) or just selected from database and applied to a network. When a modification is applied to a network functional logs are created to give more informations to the users and sent to the report server for later use. 
+
 ### Load flow server
 
 - Kind: Web service with a REST API
@@ -114,6 +116,8 @@ This services is responsible for converting substations and lines GPS coordinate
 - Storage: no
 - Connected to message broker: no
 - Other services dependencies: network store server, report server
+
+This service is reponsible for running a [loadflow](https://en.wikipedia.org/wiki/Power-flow_study) on a network of the network store server. It relies on [PowSyBl loadflow API](https://github.com/powsybl/powsybl-core/tree/main/loadflow/loadflow-api), a generic, implementation agnostic API, so that as soon as a new implementation is available, it can be integrated to this service without adding any new code. In the current version, two loadflow implementation are integrated: [Hades2](https://rte-france.github.io/hades2/) which is a free software made by RTE and [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow) a loadflow fully implemented in PowSyBl. A third one, [DynaFlow](https://github.com/dynawo/dynaflow-launcher) is going to be integrated soon. When a loadflow has ran on a network, we get results like status, metrics, functional logs and above all, state variables (voltages, flows) updated to the network store.  
 
 ### Action server
 
@@ -123,21 +127,7 @@ This services is responsible for converting substations and lines GPS coordinate
 - Connected to message broker: no
 - Other services dependencies: network store server
 
-### Security analysis server
-
-- Kind: Web service with a REST API
-- Source repository: https://github.com/gridsuite/security-analysis-server
-- Storage: Cassandra DB
-- Connected to message broker: consumer and producer
-- Other services dependencies: network store server
-
-### Directory server
-
-- Kind: Web service with a REST API
-- Source repository: https://github.com/gridsuite/directory-server
-- Storage: PostGresSQL
-- Connected to message broker: producer
-- Other services dependencies: 
+This service is resposible for storing and instanciating contingency lists. Contingencies are used by security analysis to describe network elements that we want to simulate the loss of. We support two main types of contingency list:  form based and script based. A form based contingency list is described by an element type (generator, line, etc) and some filtering criteria (country, nomina voltage, etc), so it needs to be instanciated with a specific network to be used by a security analysis. A script based contingency list is a [Groovy](https://groovy-lang.org) script where the network is exposed a global variable so that the user can write in Groovy the logic to generate contingency from network elements.
 
 ### Filter server
 
@@ -146,6 +136,26 @@ This services is responsible for converting substations and lines GPS coordinate
 - Storage: PostGresSQL
 - Connected to message broker:
 - Other services dependencies: network store server
+
+This service is responsible for storing and instanciating filters. Filters are just set of network elements and are useful in many places in the application: to help configuring network modifications, to filter data in the UIs, etc. The overall design of filters is very close to contingency lists: there is form based and Groovy script based filters.
+
+### Security analysis server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/security-analysis-server
+- Storage: Cassandra DB
+- Connected to message broker: consumer and producer
+- Other services dependencies: network store server
+
+
+
+### Directory server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/directory-server
+- Storage: PostGresSQL
+- Connected to message broker: producer
+- Other services dependencies: 
 
 ### Dynamic simulation server
 
@@ -193,11 +203,19 @@ This service is responsible for storing parameters coming from GridSuite front-e
 
 ###  Balances adjustment server
 
+TODO
+
 ### Merge orchestrator server
+
+TODO
 
 ### Case validation server
 
+TODO
+
 ### CGMES boundary server
+
+TODO
 
 
 
@@ -219,7 +237,7 @@ This service is responsible for storing parameters coming from GridSuite front-e
 - Connected to message broker: no
 - Other services dependencies: study server, action server, filter server, directory server, case server
 
-
+This is the only entry point to the back-end. So front-ends can only send requests to the gateway. Request are then routed to other micro services. This gateway is mainly responsible from implementing secury features: https and user access right verification.
 
 ### Case import job
 
