@@ -147,7 +147,7 @@ This service is responsible for storing and instanciating filters. Filters are j
 - Connected to message broker: consumer and producer
 - Other services dependencies: network store server
 
-
+This service is responsible for running a security analysis and storing resulting limit violations. A security analysis is based on loadflow calculation on a set of post contingency state. When running a security analysis we need a network ID from the network store server, a contingencu list ID from the action server and then we get a result unique ID. Thanks to this result ID we can get the calculation status (running, complete, failed, etc) and then once calculation is complete we can get full limit violation results. As for loadflow calculation we rely on [PowSyBl security analysis API](https://github.com/powsybl/powsybl-core/tree/main/security-analysis/security-analysis-api) and we support two implementations, one based on [Hades2](https://rte-france.github.io/hades2/) and another one based on [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow), [DynaFlow](https://github.com/dynawo/dynaflow-launcher) one will come soon. Security analysis are generally long time running calculation (like a few minutes), so a special design has been implemented to be able to run asynchronous calculation and allows performance scaling by running many server replicas. When a new calculation is asked using the REST API, a message is posted in a message broker queue, then a woker service (could have many instance of it across multiple replica of the service in the cluster) take the message and run the calculation. Once calculation is complete results are written to the database and a message is posted to another queue of the broker so that other web services can wait and be notified for a security analysis completion.
 
 ### Directory server
 
@@ -157,6 +157,8 @@ This service is responsible for storing and instanciating filters. Filters are j
 - Connected to message broker: producer
 - Other services dependencies: 
 
+This service is responsible for mananing a file system like hierarchy of directory where other kind of data managed by other micro-services (studies, contingency lists, filters called directory elements) can be referenced using their unique IDs. When added to a directory an element is associated to a name, a owner and a description. Access right is managed by only directories and is in the current version only implemented by a "private" attribute. A private directory is accessible with all its contents (some elements, or some sub-directories) only to its owner. A non private directory is implicitely a public directory and access is granted to all users.
+
 ### Dynamic simulation server
 
 - Kind: Web service with a REST API
@@ -164,6 +166,8 @@ This service is responsible for storing and instanciating filters. Filters are j
 - Storage: Cassandra DB
 - Connected to message broker: producer and consumer
 - Other services dependencies: network store server
+
+This service is responsible for running dynamic simulations. Is is based on [PowSyBl dynamic simulation API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-simulation/dynamic-simulation-api) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). This is still an on going work and it is not yet fully working with the current version of the code. This is also not integrated into GridStudy.
 
 ### Dynamic mapping server
 
@@ -173,6 +177,8 @@ This service is responsible for storing and instanciating filters. Filters are j
 - Connected to message broker: no
 - Other services dependencies: network store server
 
+This service is responsible for configuring how dynamic data is mapped to a network. This is still an ongoing work and is not yet integrated with dynamic simulation server.
+
 ### Study server
 
 - Kind: Web service with a REST API
@@ -180,6 +186,8 @@ This service is responsible for storing and instanciating filters. Filters are j
 - Storage: PostGresSQL
 - Connected to message broker: producer and consumer
 - Other services dependencies: network store server, case server, single line diagram server, network conversion server, geo data server, network map server, network modification server, loadflow server, actions server, security analysis server, report server
+
+This services is responsible for managing studies. 
 
 ### Explore server
 
@@ -241,11 +249,27 @@ This is the only entry point to the back-end. So front-ends can only send reques
 
 ### Case import job
 
+- Kind: Cron job
+- Source repository: https://github.com/gridsuite/case-import-job
+- Storage: Cassandra DB
+- Connected to message broker: yes as a message producer
+- Other services dependencies:
+
 ### CGMES boundary import job
+
+- Kind: Cron job
+- Source repository: https://github.com/gridsuite/cgmes-boundary-import-job
+- Storage: Cassandra DB
+- Connected to message broker: yes as a message producer
+- Other services dependencies:
 
 ### CGMES assembling job
 
-
+- Kind: Cron job
+- Source repository: https://github.com/gridsuite/cgmes-assembling-job
+- Storage: Cassandra DB
+- Connected to message broker: yes as a message producer
+- Other services dependencies:
 
 ## Front-ends description:
 
@@ -258,3 +282,5 @@ This is the only entry point to the back-end. So front-ends can only send reques
 ### Grid Dyna
 
 ### Grid Geo
+
+Not yet implemented
