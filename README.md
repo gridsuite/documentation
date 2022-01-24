@@ -337,7 +337,7 @@ This is the only entry point to the back-end. So front-ends can only send reques
 - Other services dependencies:
 - Use PowSyBl libraries: yes
 
-This cron job is responsible for regularly quey a FTP server, to get new cases (in a specific configured directory of the ftp). If new cases are available, they are all uploaded into the case server, so we can consider, this job as a bridge between an external FTP and our internal case storage solution. This jib keep track of already imported cases by storing meta infos in a database (which is updated each time new cases are uploaded). Only cases supported by PowSyBl framework are processed.
+This cron job is responsible for regularly querying a FTP server, to get new cases (in a specific configured directory of the ftp). If new cases are available, they are all uploaded into the case server, so we can consider, this job as a bridge between an external FTP and our internal case storage solution. This job keep track of already imported cases by storing meta infos in a database (which is updated each time new cases are uploaded). Only cases supported by PowSyBl framework are processed.
 
 ### CGMES boundary import job
 
@@ -348,7 +348,7 @@ This cron job is responsible for regularly quey a FTP server, to get new cases (
 - Other services dependencies:
 - Use PowSyBl libraries: no
 
-This cron job is responsible for regularly query a FTP server to get new CGMES boundary files and upload to to CGMES boundary server.
+This cron job is responsible for regularly querying a FTP server to get new CGMES boundary files and upload to to CGMES boundary server.
 
 ### CGMES assembling job
 
