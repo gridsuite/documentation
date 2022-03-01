@@ -68,7 +68,7 @@ This service is responsible for generating single line diagrams either for a vol
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/geo-data
-- Storage: Cassandra DB
+- Storage: PostGresSQL
 - Connected to message broker: no
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
