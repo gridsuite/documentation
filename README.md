@@ -2,7 +2,7 @@
 
 ## Architecture
 
-Here is a micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 3 different databases: PostGresSQL which is the default solution, Cassandra DB for micro-services requiring high throughput and a good scaling and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. 
+Here is a micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 2 different databases: PostGresSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. 
 
 
 
@@ -14,7 +14,7 @@ Here is a micro-service architecture diagram. Yellow boxes are micro-services, o
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/powsybl/powsybl-network-store
-- Storage: Cassandra DB
+- Storage: PostGresSQL
 - Connected to Message broker: no
 - Other services dependencies: none
 - Use PowSyBl libraries: yes
@@ -178,7 +178,7 @@ This service is responsible for managing a file system like the hierarchy of dir
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/dynamic-simulation-server
-- Storage: Cassandra DB
+- Storage: PostGresSQL
 - Connected to message broker: producer and consumer
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
@@ -332,7 +332,7 @@ This is the only entry point to the back-end. Front-ends can only send requests 
 
 - Kind: Cron job
 - Source repository: https://github.com/gridsuite/case-import-job
-- Storage: Cassandra DB
+- Storage: PostGresSQL
 - Connected to message broker: yes as a message producer
 - Other services dependencies:
 - Use PowSyBl libraries: yes
@@ -354,7 +354,7 @@ This cron job is responsible for regularly querying a FTP server to get new CGME
 
 - Kind: Cron job
 - Source repository: https://github.com/gridsuite/cgmes-assembling-job
-- Storage: Cassandra DB
+- Storage: PostGresSQL
 - Connected to message broker: yes as a message producer
 - Other services dependencies:
 - Use PowSyBl libraries: yes
