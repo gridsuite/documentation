@@ -81,7 +81,7 @@ This service is responsible for storing network related geographical data. There
 - Source repository: https://github.com/gridsuite/cgmes-gl-server
 - Storage: no
 - Connected to message broker: no
-- Other services dependencies: network store server, geo data server
+- Other services dependencies: network store server, geo data server, Case server
 - Use PowSyBl libraries: yes
 
 This service is responsible of converting CGMES GL (Graphical Layout) profile to GPS coordinates uploaded to geo data server. 
