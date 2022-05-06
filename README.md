@@ -78,7 +78,7 @@ This service is responsible for storing network related geographical data. There
 ### CGMES GL server
 
 - Kind: Web service with a REST API
-- Source repository: https://github.com/powsybl/powsybl-cgmes-gl
+- Source repository: https://github.com/gridsuite/cgmes-gl-server
 - Storage: no
 - Connected to message broker: no
 - Other services dependencies: network store server, geo data server
