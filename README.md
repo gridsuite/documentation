@@ -111,7 +111,7 @@ This service is responsible for extracting/filtering/reshaping network data from
 ### Network modification server
 
 - Kind: Web service with a REST API
-- Source repository: https://github.com/gridsuite/network-map-server
+- Source repository: https://github.com/gridsuite/network-modification-server
 - Storage: PostGresSQL
 - Connected to message broker: no
 - Other services dependencies: network store server, report server
