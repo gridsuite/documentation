@@ -2,11 +2,45 @@
 
 ## Architecture
 
-Here is a micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 2 different databases: PostGresSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. 
+Here is a micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 2 different databases: PostGresSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
 
 
 
 ![gridsuite_architecture.drawio](diagrams/gridsuite_architecture.svg)
+
+## Technical stack
+
+### Back-end
+
+All of the micro-services rely mainly on language and frameworks:
+
+- Java 11
+- Spring Boot 2.6 + Spring Cloud 2021
+- PowSyBl dependencies 1.3.0
+
+And technical components:
+
+- RabbitMQ 3.11
+- PostGresSQL 13
+- ElasticSearch 7.9
+
+The application can be deployed via:
+
+- Kubernetes 1.19+. 
+- Docker compose 3
+
+
+### Front-end
+
+Front-ends are web application based on:
+
+- ReactJS 18
+- React Redux
+- Component library: MUI 5
+- DeckGL (WebGL based) for large power grid visualisation 
+- OpenID Connect for authentication
+
+
 
 ## Micro-services description
 
