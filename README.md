@@ -197,6 +197,28 @@ This service is responsible for storing and instantiating filters. Filters are j
 
 This service is responsible for running a security analysis and storing resulting limit violations. A security analysis is based on loadflow calculations on a set of post-contingency states. When running a security analysis we need a network ID from the network store server, a contingency list ID from the action server and then we get a unique result ID. Thanks to this result ID we can get the calculation status (running, complete, failed, etc) and then once the calculation is complete we can get full limit violation results. As for loadflow calculation we rely on [PowSyBl security analysis API](https://github.com/powsybl/powsybl-core/tree/main/security-analysis/security-analysis-api) and we support two implementations, one based on [Hades2](https://rte-france.github.io/hades2/) and the other one based on [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow), [DynaFlow](https://github.com/dynawo/dynaflow-launcher) implementation will come soon. Security analyses are generally long time running calculations (few minutes length), this is why a special design has been implemented to be able to run asynchronous calculations and to allow performance scaling by running many server replicas. When a new calculation is asked using the REST API, a message is posted on a RabbitMQ queue, then a worker service (could have many instances of it across multiple replicas of the service in the cluster) takes the message and runs the calculation. Once the calculation is complete, results are written back to the database and a message is posted to another queue of the broker so that other web services can be notified when security analysis results are available.
 
+### Sensitivity analysis server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/sensitivity-analysis-server
+- Storage: PostGresSQL
+- Connected to message broker: consumer and producer
+- Other services dependencies: network store server, actions server, filter server, report server
+- Use PowSyBl libraries: yes
+
+This service is responsible for running a sensitivity analysis and storing resulting sensitivity factors, sensitivity values and contingency statuses. 
+A sensitivity analysis is based on loadflow calculations on a list of sensitivity factors, a list of contingencies and a list of sensitivity variable sets. 
+When running a sensitivity analysis we need a network ID from the network store server, and a configuration containing multiple filter ID 
+from the filter server, multiple contingency list ID from the actions server and then we get a unique result ID. 
+Thanks to this result ID we can get the calculation status (running, complete, failed, etc) and then once the calculation is complete we can get full results. 
+As for loadflow calculation we rely on [PowSyBl sensitivity analysis API](https://github.com/powsybl/powsybl-core/tree/main/sensitivity-analysis-api)
+and we support two implementations, one based on [Hades2](https://rte-france.github.io/hades2/) and the other one based 
+on [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow). Sensitivity analyses are generally long time running calculations (few minutes length), this is why a special design has been implemented 
+to be able to run asynchronous calculations and to allow performance scaling by running many server replicas. When a new calculation 
+is asked using the REST API, a message is posted on a RabbitMQ queue, then a worker service (could have many instances of it across multiple replicas of the service in the cluster) 
+takes the message and runs the calculation. Once the calculation is complete, results are written back to the database and a message is posted 
+to another queue of the broker so that other web services can be notified when sensitivity analysis results are available.
+
 ### Directory server
 
 - Kind: Web service with a REST API
