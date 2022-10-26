@@ -2,7 +2,7 @@
 
 ## Architecture
 
-Here is a micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 2 different databases: PostGresSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
+Here is a micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 2 different databases: PostgreSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
 
 
 
@@ -21,7 +21,7 @@ All of the micro-services rely mainly on language and frameworks:
 And technical components:
 
 - RabbitMQ 3.11
-- PostGresSQL 13
+- PostgreSQL 13
 - ElasticSearch 7.9
 
 The application can be deployed via:
@@ -48,7 +48,7 @@ Front-ends are web application based on:
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/powsybl/powsybl-network-store
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to Message broker: no
 - Other services dependencies: none
 - Use PowSyBl libraries: yes
@@ -70,7 +70,7 @@ This service is responsible for storing cases in any of the PowSyBl supported fo
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/report-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Other services dependencies: no
 - Use PowSyBl libraries: yes
 
@@ -102,7 +102,7 @@ This service is responsible for generating single line diagrams either for a vol
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/geo-data
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: no
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
@@ -146,7 +146,7 @@ This service is responsible for extracting/filtering/reshaping network data from
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/network-modification-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: no
 - Other services dependencies: network store server, report server
 - Use PowSyBl libraries: yes
@@ -168,7 +168,7 @@ This service is reponsible for running a [loadflow](https://en.wikipedia.org/wik
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/actions-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: no
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
@@ -179,7 +179,7 @@ This service is responsible for storing and instantiating contingency lists. Con
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/filter-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker:
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
@@ -190,7 +190,7 @@ This service is responsible for storing and instantiating filters. Filters are j
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/security-analysis-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: consumer and producer
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
@@ -201,7 +201,7 @@ This service is responsible for running a security analysis and storing resultin
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/sensitivity-analysis-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: consumer and producer
 - Other services dependencies: network store server, actions server, filter server, report server
 - Use PowSyBl libraries: yes
@@ -223,7 +223,7 @@ to another queue of the broker so that other web services can be notified when s
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/directory-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: producer
 - Other services dependencies: 
 - Use PowSyBl libraries: no
@@ -234,7 +234,7 @@ This service is responsible for managing a file system like the hierarchy of dir
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/dynamic-simulation-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: producer and consumer
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
@@ -245,7 +245,7 @@ This service is responsible for running dynamic simulations. It is based on [Pow
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/dynamic-mapping-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: no
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
@@ -256,7 +256,7 @@ This service is responsible for configuring how dynamic data is mapped to a netw
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/study-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: producer and consumer
 - Other services dependencies: network store server, case server, single line diagram server, network conversion server, geo data server, network map server, network modification server, loadflow server, actions server, security analysis server, report server
 - Use PowSyBl libraries: yes
@@ -278,7 +278,7 @@ This service is responsible for managing users data. This is the back-end entry 
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/config-server
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: producer
 - Other services dependencies:
 - Use PowSyBl libraries: no
@@ -388,7 +388,7 @@ This is the only entry point to the back-end. Front-ends can only send requests 
 
 - Kind: Cron job
 - Source repository: https://github.com/gridsuite/case-import-job
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: yes as a message producer
 - Other services dependencies:
 - Use PowSyBl libraries: yes
@@ -410,7 +410,7 @@ This cron job is responsible for regularly querying a FTP server to get new CGME
 
 - Kind: Cron job
 - Source repository: https://github.com/gridsuite/cgmes-assembling-job
-- Storage: PostGresSQL
+- Storage: PostgreSQL
 - Connected to message broker: yes as a message producer
 - Other services dependencies:
 - Use PowSyBl libraries: yes
