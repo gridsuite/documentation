@@ -384,6 +384,18 @@ Same as study notification server, but for GridMerge asynchronous update.
 
 This is the only entry point to the back-end. Front-ends can only send requests to the gateway. All the other web services do not expose their API directly to the front-ends. Requests are routed by the gateway to other micro services. This gateway is mainly responsible from implementing secury features: https and user access right verification.
 
+### User admin server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/user-admin-server
+- Storage: PostgreSQL
+- Other services dependencies: no
+- Use PowSyBl libraries: no
+
+This service is responsible for storing a list of users authorized to access the application and storing also users connection information.
+It is used by the gateway service to check access authorization.
+
+
 ### Case import job
 
 - Kind: Cron job
