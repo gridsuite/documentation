@@ -219,6 +219,17 @@ is asked using the REST API, a message is posted on a RabbitMQ queue, then a wor
 takes the message and runs the calculation. Once the calculation is complete, results are written back to the database and a message is posted 
 to another queue of the broker so that other web services can be notified when sensitivity analysis results are available.
 
+### Short-circuit server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/shortcircuit-server
+- Storage: PostgreSQL
+- Connected to message broker: consumer and producer
+- Other services dependencies: network store server
+- Use PowSyBl libraries: yes
+
+This service is responsible for running a short-circuit analysis and storing resulting short-circuit violations. As for loadflow calculation we rely on [PowSyBl shortcircuit API](https://github.com/powsybl/powsybl-core/tree/main/shortcircuit-api). A short-circuit computation model is required to be executed behind the API. As security and sensibility analyses, short-circuit calculations are ran asynchronously. When running a short-circuit analysis we need a network ID from the network store server and then we get a unique result ID. Thanks to this result ID we can get the calculation status (running, complete, failed, etc) and then once the calculation is complete we can get full violation results. When a new calculation is asked using the REST API, a message is posted on a RabbitMQ queue, then a worker service (could have many instances of it across multiple replicas of the service in the cluster) takes the message and runs the calculation. Once the calculation is complete, results are written back to the database and a message is posted to another queue of the broker so that other web services can be notified when short-circuit analysis results are available.
+
 ### Directory server
 
 - Kind: Web service with a REST API
