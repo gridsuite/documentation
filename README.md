@@ -2,11 +2,26 @@
 
 ## Architecture
 
-Here is a micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 2 different databases: PostgreSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
+Here is a micro-service architecture diagram. Boxes are micro-services, orange/red boxes are services emiting/receiving events and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMPQ connections. We use 2 different databases: PostgreSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use file systems and FTP storages. Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication thought a RabbitMQ message broker. Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
+
+![gridsuite_architecture.drawio (Services)](diagrams/gridsuite_architecture_services.svg)
 
 
+### Events messages
 
-![gridsuite_architecture.drawio](diagrams/gridsuite_architecture.svg)
+For all asynchrone tasks or jobs with long calculation, events messages are used on a message broker.  
+The implementation used here is an RabbitMQ server (AMQP messages) for the backend side, and WebSocket events for frontend side.
+
+![gridsuite_architecture.drawio (Events flow)](diagrams/gridsuite_architecture_flow-amqp.svg)
+
+
+### External API access
+
+The different apps access to the API from the navigator through the gateway.  
+It act as a reverse proxy and is responsible of checking authentication and authorization of the user (ID & rights).
+
+![gridsuite_architecture.drawio (GateWay)](diagrams/gridsuite_architecture_gateway.svg)
+
 
 ## Technical stack
 
@@ -14,9 +29,9 @@ Here is a micro-service architecture diagram. Yellow boxes are micro-services, o
 
 All of the micro-services rely mainly on language and frameworks:
 
-- Java 11
-- Spring Boot 2.6 + Spring Cloud 2021
-- PowSyBl dependencies 1.3.0
+- Java 17
+- Spring Boot 2.7.3 + Spring Cloud 3.2.4
+- PowSyBl dependencies 5.3.1
 
 And technical components:
 
@@ -27,7 +42,7 @@ And technical components:
 The application can be deployed via:
 
 - Kubernetes 1.19+. 
-- Docker compose 3
+- Docker compose v2 (format 3)
 
 
 ### Front-end
@@ -343,7 +358,7 @@ This service is responsible for storing CGMES boundary set files, needed when co
 ### Study notification server
 
 - Kind: WebSocket endpoint
-- Source repository: https://github.com/gridsuite/notification-server
+- Source repository: https://github.com/gridsuite/study-notification-server
 - Storage: no
 - Connected to message broker: yes a consumer of study queue
 - Other services dependencies:
