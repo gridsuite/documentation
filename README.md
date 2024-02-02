@@ -74,7 +74,7 @@ This service is responsible for storing cases in any of the PowSyBl supported fo
 - Other services dependencies: no
 - Use PowSyBl libraries: yes
 
-This service is responsible for storing functional logs. Functional logs unlike technical logs (managed by Slf4j/Logback and EFK stack) are designed to be presented to a user.  It is often less verbose that technical logs and contains meta-data associated to each log (for instance numerical variable values and their unit like MW or A). In the current version of the service, there are very few query capabilities but the aim is to be able to select logs from a time interval, from key types, etc. Each log is associated by a unique identifier (UUID) to a container which can be for instance a study node or a merge from the merge orchestrator server or any kind of application that need to store functional logs.  Functional  Java modeling logs are handled by [PowSyBl reporter API](https://github.com/powsybl/powsybl-core/tree/main/commons/src/main/java/com/powsybl/commons/reporter) and are used in all micro-services that need to create logs. Many of PowSyBl underlying features are capable of generating functional logs by just passing a  `Reporter` by parameter. On front-end side a [generic ReactJs component](https://www.npmjs.com/package/@gridsuite/commons-ui) is available to display functional logs and is already integrated in GridStudy and GridMerge.
+This service is responsible for storing functional logs. Functional logs unlike technical logs (managed by Slf4j/Logback and EFK stack) are designed to be presented to a user.  They are often less verbose than technical logs and contain meta-data associated to each log (for instance numerical variable values and their unit like MW or A). In the current version of the service, there are very few query capabilities but the aim is to be able to select logs from a time interval, from key types, etc. Each log is associated by a unique identifier (UUID) to a container which can be for instance a study node or a merge from the merge orchestrator server or any kind of application that need to store functional logs.  Functional  Java modeling logs are handled by [PowSyBl reporter API](https://github.com/powsybl/powsybl-core/tree/main/commons/src/main/java/com/powsybl/commons/reporter) and are used in all micro-services that need to create logs. Many of PowSyBl underlying features are capable of generating functional logs by just passing a  `Reporter` by parameter. On front-end side a [generic ReactJs component](https://www.npmjs.com/package/@gridsuite/commons-ui) is available to display functional logs and is already integrated in GridStudy and GridMerge.
 
 ### Network conversion server
 
@@ -129,7 +129,7 @@ This service is responsible of converting CGMES GL (Graphical Layout) profile to
 - Other services dependencies: network store server, geo data server
 - Use PowSyBl libraries: no
 
-This services is responsible for converting substations and lines GPS coordinates coming from [Open Data Réseau Energies](https://opendata.reseaux-energies.fr/pages/accueil/?flg=fr) system (ODRE) and uploading it to the geo data server. ODRE is a web site (and also a web service with a REST API) where GPS positions of RTE's equipments have been open sourced. 
+This service is responsible for converting GPS coordinates of substations and lines coming from [Open Data Réseau Energies](https://opendata.reseaux-energies.fr/pages/accueil/?flg=fr) system (ODRE) and uploading them to the geo data server. ODRE is a web site (and also a web service with a REST API) where GPS positions of RTE's equipments have been open sourced. 
 
 ### Network map server
 
@@ -151,7 +151,7 @@ This service is responsible for extracting/filtering/reshaping network data from
 - Other services dependencies: network store server, report server
 - Use PowSyBl libraries: yes
 
-This service is responsible for storing and applying modifications to a network of the network store server. This is one of the most important service of the application as it implements many business logic for modifying the network. There are many kinds of modifications supported by this service like network element creation (substation, voltage level, generator, load, etc), network element removal, switch opening or closing, line or transformer triggering or locking out, network element elementary modification (like a target value modification, or a tap position modification). Only a very small number of expected possible modifications have yet been implemented with many more to come in the future. Network modifications have a unique ID (UUID) and could be associated to a group which has itself a unique ID (UUID) and this is how a set of network modifications is referenced by other web services. Depending of the use case a network modification can be stored only or can be both stored and applied to a network  (given a network ID in the network store) or just selected from the database and applied to a network. When a modification is applied to a network functional logs are created to give more informations to the users and sent to the report server for later use.
+This service is responsible for storing and applying modifications to a network of the network store server. This is one of the most important service of the application as it implements many business logic for modifying the network. There are many kinds of modifications supported by this service like network element creation (substation, voltage level, generator, load, etc), network element removal, switch opening or closing, line or transformer triggering or locking out, network element elementary modification (like a target value modification, or a tap position modification). Only a very small number of expected possible modifications have yet been implemented with many more to come in the future. Network modifications have a unique ID (UUID) and could be associated to a group which has itself a unique ID (UUID) and this is how a set of network modifications is referenced by other web services. Depending on the use case a network modification can be stored only or can be both stored and applied to a network  (given a network ID in the network store) or just selected from the database and applied to a network. When a modification is applied to a network functional logs are created to give more informations to the users and sent to the report server for later use.
 
 ### Load flow server
 
@@ -283,7 +283,7 @@ This service is responsible for managing studies and it is the main back-end ent
 - Other services dependencies: directory server, study server, actions server, filter server
 - Use PowSyBl libraries: no
 
-This service is responsible for managing users data. This is the back-end entry point for GridExplore front-end. The main goal of this service is to aggregate and to coordinate requests to the directory server and the other data services (int current version: study server, action server and filter server, more to come). 
+This service is responsible for managing users data. This is the back-end entry point for GridExplore front-end. The main goal of this service is to aggregate and  coordinate requests to the directory server and the other data services (in the current version: study server, action server and filter server, more to come). 
 
 ### Config server
 
@@ -316,12 +316,12 @@ This service is responsible for running a [balances adjustment](https://github.c
 - Other services dependencies: network store server, cgmes boundary server, case server, load flow server, balances adjustment server, network conversion server 
 - Use PowSyBl libraries: yes
 
-This service is responsible for implementing an ENTSOE merging process. It could be based on UCTE files our CGMES files. Merge orchestrator could support several merging configurations at the same time. A merging configuration is a type of process (D-1, D-2, etc) and a list of TSOs to merge. Once the configuration is created, the merge orchestrator waits for required files (called IGM)  to be available (using the RabbitMQ case queue and fed by case server when a new case is available) and when all files are here, starts a merging process. A merging process begins by importing IGMs to network store (meaning that a conversion to IIDM is done), then each IGM is validated using the case validation server, then a topological merge is done (creating a CGM) and finally either a loadflow or a balances adjustment is run on the CGM. The CGM is then ready for download using the GridMerge interface. The goal is also to be able to publish the CGM at the end of the process (to be implemented). The Merge orchestrator server also supports complex IGM replacement strategies (to handle missing cases) using a highly configurable Groovy script. 
+This service is responsible for implementing an ENTSOE merging process. It could be based on UCTE files or CGMES files. Merge orchestrator could support several merging configurations at the same time. A merging configuration is a type of process (D-1, D-2, etc) and a list of TSOs to merge. Once the configuration is created, the merge orchestrator waits for required files (called IGM)  to be available (using the RabbitMQ case queue and fed by case server when a new case is available) and when all files are here, starts a merging process. A merging process begins by importing IGMs to network store (meaning that a conversion to IIDM is done), then each IGM is validated using the case validation server, then a topological merge is done (creating a CGM) and finally either a loadflow or a balances adjustment is run on the CGM. The CGM is then ready for download using the GridMerge interface. The goal is also to be able to publish the CGM at the end of the process (to be implemented). The Merge orchestrator server also supports complex IGM replacement strategies (to handle missing cases) using a highly configurable Groovy script. 
 
 ### Case validation server
 
 - Kind: Web service with a REST API
-  - Source repository: https://github.com/gridsuite/case-validation-server
+- Source repository: https://github.com/gridsuite/case-validation-server
 - Storage: no
 - Connected to message broker: no
 - Other services dependencies: network store server, loadflow server
@@ -393,7 +393,7 @@ Same as study notification server, but for GridMerge asynchronous update.
 - Other services dependencies: nearly all other web services
 - Use PowSyBl libraries: no
 
-This is the only entry point to the back-end. Front-ends can only send requests to the gateway. All the other web services do not expose their API directly to the front-ends. Requests are routed by the gateway to other micro services. This gateway is mainly responsible from implementing secury features: https and user access right verification.
+This is the only entry point to the back-end. Front-ends can only send requests to the gateway. All the other web services do not expose their API directly to the front-ends. Requests are routed by the gateway to other micro services. This gateway is mainly responsible for implementing security features: https and user access rights verification.
 
 ### User admin server
 
@@ -417,7 +417,7 @@ It is used by the gateway service to check access authorization.
 - Other services dependencies:
 - Use PowSyBl libraries: yes
 
-This cron job is responsible for regularly querying a FTP server, to get new cases (in a specific configured directory of the ftp). When new cases are available, they are all uploaded into the case server, so we can consider, this job as a bridge between an external FTP and our internal case storage solution. This job keeps track of already imported cases by storing meta infos in a database (which is updated each time new cases are uploaded). Only cases supported by PowSyBl framework are processed.
+This cron job is responsible for regularly querying a FTP server, to get new cases (in a specific configured directory of the ftp). When new cases are available, they are all uploaded into the case server, so we can consider this job as a bridge between an external FTP and our internal case storage solution. This job keeps track of already imported cases by storing meta infos in a database (which is updated each time new cases are uploaded). Only cases supported by PowSyBl framework are processed.
 
 ### CGMES boundary import job
 
@@ -439,7 +439,7 @@ This cron job is responsible for regularly querying a FTP server to get new CGME
 - Other services dependencies:
 - Use PowSyBl libraries: yes
 
-This cron job is a variant of the case import job. The main difference is that this job is able process CGMES cases, profile by profile. So it has the knowledge of CGMES profiles structure and keep track for each case on which profile is available or not yet. When all profiles are ready, it build a full consistent CGMES case (a zip file) and upload it to case server.
+This cron job is a variant of the case import job. The main difference is that this job is able to process CGMES cases, profile by profile. So it has the knowledge of CGMES profiles structure and keeps track for each case on which profile is available or not yet. When all profiles are ready, it builds a full consistent CGMES case (a zip file) and uploads it to case server.
 
 ## Front-ends description:
 
