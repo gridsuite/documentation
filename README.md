@@ -283,7 +283,7 @@ This service is responsible for running dynamic security analysis. It is based o
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
 
-This service is responsible for configuring how dynamic data is mapped to a network. This is still an ongoing work and is not yet integrated completely with dynamic simulation server.
+This service is responsible for configuring how dynamic data is mapped to a network. This is still an ongoing work and is not yet completely integrated with dynamic simulation server.
 
 ### Study server
 
