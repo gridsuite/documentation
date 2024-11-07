@@ -427,7 +427,7 @@ It is used by the gateway service to check access authorization.
 - Use PowSyBl libraries: no
 
 This service is responsible for storing a list of users information.
-The gateway use this API to store users information consumned in idtoken and/or accessToken.
+The gateway use this API to store users information coming from oidc profiles in idtokens.
 It is then possible to retrieve users information given a sub
 
 ### Case import job
