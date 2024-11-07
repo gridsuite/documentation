@@ -241,16 +241,38 @@ This service is responsible for running a short-circuit analysis and storing res
 
 This service is responsible for managing a file system like the hierarchy of directories where other kind of data managed by other micro-services (studies, contingency lists, filters called directory elements) can be referenced using their unique IDs. When added to a directory an element is associated to a name, an owner and a description. Access rights are only managed through directories and in the current version they are only implemented by a "private" attribute. A private directory is accessible with all its contents (some elements, or some sub-directories) to its owner only. A non private directory is implicitly a public directory and access is granted to all users.
 
+### Time-series server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/timeseries-server
+- Storage: PostgreSQL
+- Connected to message broker: no
+- Other services dependencies:
+- Use PowSyBl libraries: yes
+
+This service is responsible for storing time-series data. It is used to persist the output data of dynamic simulations which are displayed later in GridStudy.
+
 ### Dynamic simulation server
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/gridsuite/dynamic-simulation-server
 - Storage: PostgreSQL
 - Connected to message broker: producer and consumer
-- Other services dependencies: network store server
+- Other services dependencies: network store server, report server, dynamic mapping server, time-series-server
 - Use PowSyBl libraries: yes
 
-This service is responsible for running dynamic simulations. It is based on [PowSyBl dynamic simulation API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-simulation/dynamic-simulation-api) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). This is still an ongoing work and it still doesn't work completely with the current version of the code. This is not yet integrated into GridStudy.
+This service is responsible for running dynamic simulations. It is based on [PowSyBl dynamic simulation API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-simulation/dynamic-simulation-api) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). This is still an ongoing work and it still doesn't work completely with the current version of the code. This is not yet completely integrated into GridStudy.
+
+### Dynamic security analysis server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/dynamic-security-analysis-server
+- Storage: PostgreSQL
+- Connected to message broker: producer and consumer
+- Other services dependencies: network store server, report server, dynamic simulation server
+- Use PowSyBl libraries: yes
+
+This service is responsible for running dynamic security analysis. It is based on [PowSyBl dynamic security analysis API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-security-analysis) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). This is still an ongoing work and it still doesn't work completely with the current version of the code. This is not yet completely integrated into GridStudy.
 
 ### Dynamic mapping server
 
@@ -261,7 +283,7 @@ This service is responsible for running dynamic simulations. It is based on [Pow
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
 
-This service is responsible for configuring how dynamic data is mapped to a network. This is still an ongoing work and is not yet integrated with dynamic simulation server.
+This service is responsible for configuring how dynamic data is mapped to a network. This is still an ongoing work and is not yet integrated completely with dynamic simulation server.
 
 ### Study server
 
@@ -381,7 +403,7 @@ Same as study notification server, but for GridExplore asynchronous update.
 - Other services dependencies:
 - Use PowSyBl libraries: no
 
-Same as study notification server, but to manage config-server notifications. Is is used by all front-ends.
+Same as study notification server, but to manage config-server notifications. It is used by all front-ends.
 
 ### Merge notification server
 
