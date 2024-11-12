@@ -417,6 +417,18 @@ This is the only entry point to the back-end. Front-ends can only send requests 
 This service is responsible for storing a list of users authorized to access the application and storing also users connection information.
 It is used by the gateway service to check access authorization.
 
+### User identity OIDC replication server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/user-identity-oidc-replication-server
+- Storage: PostgreSQL
+- Connected to message broker: no
+- Other services dependencies: no
+- Use PowSyBl libraries: no
+
+This service is responsible for storing a list of users information.
+The gateway use this API to store users information coming from oidc profiles in idtokens.
+It is then possible to retrieve users information given a sub
 
 ### Case import job
 
