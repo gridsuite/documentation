@@ -261,7 +261,7 @@ This service is responsible for storing time-series data. It is used to persist 
 - Other services dependencies: network store server, report server, dynamic mapping server, time-series-server
 - Use PowSyBl libraries: yes
 
-This service is responsible for running dynamic simulations. It is based on [PowSyBl dynamic simulation API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-simulation/dynamic-simulation-api) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). This is still an ongoing work and it still doesn't work completely with the current version of the code. This is not yet completely integrated into GridStudy.
+This service is responsible for running dynamic simulations. It is based on [PowSyBl dynamic simulation API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-simulation/dynamic-simulation-api) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). 
 
 ### Dynamic security analysis server
 
