@@ -272,7 +272,7 @@ This service is responsible for running dynamic simulations. It is based on [Pow
 - Other services dependencies: network store server, report server, dynamic simulation server
 - Use PowSyBl libraries: yes
 
-This service is responsible for running dynamic security analysis. It is based on [PowSyBl dynamic security analysis API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-security-analysis) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). This is still an ongoing work and it still doesn't work completely with the current version of the code. This is not yet completely integrated into GridStudy.
+This service is responsible for running dynamic security analysis. It is based on [PowSyBl dynamic security analysis API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-security-analysis) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo).
 
 ### Dynamic mapping server
 
@@ -283,7 +283,7 @@ This service is responsible for running dynamic security analysis. It is based o
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
 
-This service is responsible for configuring how dynamic data is mapped to a network. This is still an ongoing work and is not yet completely integrated with dynamic simulation server.
+This service is responsible for configuring how dynamic data is mapped to a network.
 
 ### Study server
 
