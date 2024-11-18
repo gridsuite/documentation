@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:132.0) Gecko/20100101 Firefox/132.0" version="24.8.4">
   <diagram id="nZ52ACv4BuAKX4Gc4Oga" name="Page-1">
-    <mxGraphModel dx="1602" dy="901" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
+    <mxGraphModel dx="2074" dy="1130" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1000,11 +1000,24 @@
             <mxPoint x="707" y="1133" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RyiixtraGsQ0eb4MuX7x-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="RyiixtraGsQ0eb4MuX7x-6" target="f9GNQP5eCho-4kWKBRWq-19">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="647" y="1100" as="sourcePoint" />
-            <mxPoint x="540" y="1200" as="targetPoint" />
+        <mxCell id="XQN79z3bMzuVW6qm5INo-29" value="&lt;div&gt;get output state &lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="XQN79z3bMzuVW6qm5INo-28" vertex="1" connectable="0">
+          <mxGeometry x="-0.2863" y="-2" relative="1" as="geometry">
+            <mxPoint x="-20" y="12" as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="PFSXCx3aC4fddB90l2Ho-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="PFSXCx3aC4fddB90l2Ho-6" target="f9GNQP5eCho-4kWKBRWq-19" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="577" y="1210" />
+              <mxPoint x="527" y="1210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFSXCx3aC4fddB90l2Ho-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="PFSXCx3aC4fddB90l2Ho-6" target="qp7J1lhOK_fcD2x9cmu0-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PFSXCx3aC4fddB90l2Ho-6" value="User identity OIDC replication server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="516.5" y="1400" width="120" height="65" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
