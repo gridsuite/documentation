@@ -318,16 +318,16 @@ This service is responsible for managing users data. This is the back-end entry 
 
 This service is responsible for storing parameters coming from GridSuite front-ends. A parameter is a key value (String, String) type data associated to a user and an application (just a String like 'study' or 'merge'). Thanks to this service, front-ends can have their states saved (like options in parameters dialog) and users are able to keep the same UI configuration on different machines and browsers.
 
-### Spreadsheet config server
+### Study config server
 
 - Kind: Web service with a REST API
-- Source repository: https://github.com/gridsuite/spreadsheet-config-server
+- Source repository: https://github.com/gridsuite/study-config-server
 - Storage: PostgreSQL
 - Connected to message broker: no
 - Other services dependencies: none
 - Use PowSyBl libraries: no
 
-This service is responsible for storing and managing spreadsheet configurations. A spreadsheet configuration is a set of columns that can be used to display network data in a tabular form. This service is used by GridStudy and GridExplore front-ends.
+This service is responsible for storing and managing study-related configurations, like spreadsheet configuration and network visualization parameters. A spreadsheet configuration is a set of columns that can be used to display network data in a tabular form. This service is used by GridStudy and GridExplore front-ends.
 ###  Balances adjustment server
 
 - Kind: Web service with a REST API
