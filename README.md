@@ -91,12 +91,12 @@ This service is responsible for importing/exporting cases to/from the network st
 
 - Kind: Web service with a REST API
 - Source repository: https://github.com/powsybl/powsybl-single-line-diagram-server
-- Storage: none
+- Storage: PostgreSQL
 - Connected to message broker: no
 - Other services dependencies: network store server
 - Use PowSyBl libraries: yes
 
-This service is responsible for generating single line diagrams either for a voltage level or for a full substation using a network stored into the network store server. Single line diagram generation feature is provided by a [PowSyBl component](https://github.com/powsybl/powsybl-single-line-diagram). A single line diagram consists of one SVG file and additional meta-data (mainly to keep links with network elements and original network IDs).
+This service is responsible for generating single line diagrams either for a voltage level or for a full substation using a network stored into the network store server. Single line diagram generation feature is provided by a [PowSyBl component](https://github.com/powsybl/powsybl-diagram). A single line diagram consists of one SVG file and additional meta-data (mainly to keep links with network elements and original network IDs).
 
 ### Geo data server
 
