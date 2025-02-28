@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.16">
   <diagram id="nZ52ACv4BuAKX4Gc4Oga" name="Page-1">
-    <mxGraphModel dx="3251" dy="1687" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="752" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1006,7 +1006,7 @@
         <mxCell id="2" value="Study config server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="890" y="1658" width="140" height="65" as="geometry" />
         </mxCell>
-        <mxCell id="3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.007;entryY=0.471;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="4" edge="1" source="2">
+        <mxCell id="3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.007;entryY=0.471;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2" target="4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1090" y="1650" as="targetPoint" />
             <Array as="points">
@@ -1090,7 +1090,7 @@
         <mxCell id="PFSXCx3aC4fddB90l2Ho-6" value="User identity OIDC replication server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="516.5" y="1400" width="120" height="65" as="geometry" />
         </mxCell>
-        <mxCell id="i-uafJUYv_sAjmH7uMFY-6" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.635;entryY=0.016;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="gnLXbhwJznotGgnq6ZsX-50" target="2">
+        <mxCell id="i-uafJUYv_sAjmH7uMFY-6" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.635;entryY=0.016;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="gnLXbhwJznotGgnq6ZsX-50" target="2" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1020" y="1580" as="sourcePoint" />
             <mxPoint x="1030" y="1630" as="targetPoint" />
@@ -1099,7 +1099,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="i-uafJUYv_sAjmH7uMFY-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.853;entryY=0.015;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+        <mxCell id="i-uafJUYv_sAjmH7uMFY-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.853;entryY=0.015;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1056" y="1460" />
@@ -1108,6 +1108,12 @@
             <mxPoint x="1056" y="890" as="sourcePoint" />
             <mxPoint x="1005.4200000000001" y="1658.975" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="BRkBVbPgRIt28RssKka3-6" value="PostgreSQL" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="816.5" y="380" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BRkBVbPgRIt28RssKka3-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.656;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="gnLXbhwJznotGgnq6ZsX-2" target="BRkBVbPgRIt28RssKka3-6">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
