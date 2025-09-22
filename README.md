@@ -274,6 +274,17 @@ This service is responsible for running dynamic simulations. It is based on [Pow
 
 This service is responsible for running dynamic security analysis. It is based on [PowSyBl dynamic security analysis API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-security-analysis) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo).
 
+### Dynamic margin calculation server
+
+- Kind: Web service with a REST API
+- Source repository: https://github.com/gridsuite/dynamic-margin-calculation-server
+- Storage: PostgreSQL
+- Connected to message broker: producer and consumer
+- Other services dependencies: network store server, report server
+- Use PowSyBl libraries: yes
+
+This service is responsible for running dynamic margin calculation. It is based on [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo).
+
 ### Dynamic mapping server
 
 - Kind: Web service with a REST API
