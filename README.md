@@ -5,8 +5,6 @@
 Here is a very high level systems architecture diagram.
 ![archi_gridsuite.png](diagrams/archi_gridsuite.png)
 
-Here is a more in depth micro-service architecture diagram. Yellow boxes are micro-services, orange boxes are user interfaces and all blue boxes are external services (like databases, a message broker, etc). Arrows represent http, websockets or AMQP connections. 
-
 We use 2 different databases: PostgreSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use S3 compatible object storage.
 
 Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication though a RabbitMQ message broker. Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
