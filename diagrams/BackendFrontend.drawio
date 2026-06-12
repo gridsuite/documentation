@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:150.0) Gecko/20100101 Firefox/150.0" scale="1" border="0">
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64; rv:150.0) Gecko/20100101 Firefox/150.0" scale="1" border="0">
   <diagram name="Page-1" id="90a13364-a465-7bf4-72fc-28e22215d7a0">
-    <mxGraphModel dx="1768" dy="1114" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="#F1F5F9" math="0" shadow="0">
+    <mxGraphModel dx="1664" dy="1139" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="#F1F5F9" math="0" shadow="0">
       <root>
         <mxCell id="0" style=";html=1;" />
         <mxCell id="1" parent="0" style=";html=1;" />
@@ -38,7 +38,7 @@
           <mxGeometry height="66" width="120" x="160" y="455" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Monitor" vertex="1">
-          <mxGeometry height="66" width="120" x="160" y="573" as="geometry" />
+          <mxGeometry height="66" width="120" x="160" y="599" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Dyna" vertex="1">
           <mxGeometry height="66" width="120" x="160" y="723" as="geometry" />
@@ -71,7 +71,7 @@
           <mxGeometry height="30" width="275" x="401" y="521" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=1.5;fontColor=#7C2D12;" value="Monitor Server" vertex="1">
-          <mxGeometry height="30" width="275" x="401" y="590" as="geometry" />
+          <mxGeometry height="30" width="275" x="401" y="616" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=1.5;fontColor=#7C2D12;" value="Dyna Mapping Server" vertex="1">
           <mxGeometry height="30" width="275" x="401" y="741" as="geometry" />
@@ -107,7 +107,7 @@
           <mxGeometry height="30" width="275" x="730.5" y="530" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=1.5;fontColor=#4C1D95;" value="Monitor Worker Server" vertex="1">
-          <mxGeometry height="30" width="275" x="730.5" y="591" as="geometry" />
+          <mxGeometry height="30" width="275" x="730.5" y="617" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-60" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=1.5;fontColor=#4C1D95;" value="Dynamic Simulation Server" vertex="1">
           <mxGeometry height="30" width="275" x="730.5" y="694" as="geometry" />
@@ -186,8 +186,8 @@
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-32" edge="1" parent="1" source="rgu2BDKIU-6iCYOQIiJl-26" style="endArrow=block;endFill=1;html=1;rounded=0;elbow=vertical;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#475569;strokeWidth=1.5;" target="rgu2BDKIU-6iCYOQIiJl-28" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="320" y="600" as="sourcePoint" />
-            <mxPoint x="370" y="550" as="targetPoint" />
+            <mxPoint x="320" y="626" as="sourcePoint" />
+            <mxPoint x="370" y="576" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-39" edge="1" parent="1" source="rgu2BDKIU-6iCYOQIiJl-37" style="rounded=0;orthogonalLoop=1;jettySize=auto;elbow=vertical;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#475569;strokeWidth=1.5;endArrow=block;endFill=1;">
@@ -225,6 +225,9 @@
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-83" edge="1" parent="1" source="rgu2BDKIU-6iCYOQIiJl-74" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1.019;entryY=0.611;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#475569;strokeWidth=1.5;endArrow=block;endFill=1;" target="rgu2BDKIU-6iCYOQIiJl-73">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xMU5c71uW4lNuUfY3gx2-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=1.5;fontColor=#4C1D95;" value="Voltage Init Server" vertex="1">
+          <mxGeometry height="30" width="275" x="730" y="569" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
