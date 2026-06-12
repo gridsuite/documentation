@@ -120,6 +120,12 @@ This service is responsible for running a short-circuit analysis and storing res
 
 Source repository: https://github.com/gridsuite/shortcircuit-server
 
+#### Voltage init server
+
+This service is responsible for running a voltage initialization calculation. 
+
+Source repository: https://github.com/gridsuite/voltage-init-server
+
 #### Directory server
 
 This service is responsible for managing a file system like the hierarchy of directories where other kind of data managed by other micro-services (studies, contingency lists, filters called directory elements) can be referenced using their unique IDs. When added to a directory an element is associated to a name, an owner and a description. Access rights are only managed through directories and in the current version they are only implemented by a "private" attribute. A private directory is accessible with all its contents (some elements, or some sub-directories) to its owner only. A non private directory is implicitly a public directory and access is granted to all users.
