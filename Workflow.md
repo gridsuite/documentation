@@ -1,8 +1,16 @@
 # Development Workflow
 
+## Code Owners
+
+We define ownership of knowledge and responsibilities for code and documentation through specially named `OWNERS` files, which list the usernames of people responsible for a directory and its children.
+
+Each subdirectory may also contain its own `OWNERS` file. Ownership is hierarchically additive: a given file is owned by the union of members listed in all `OWNERS` files above it in the directory tree. The list should remain relatively small and focused to ensure responsibility is clear.
+
+The definition of owners across all GridSuite repositories is currently in progress.
+
 ## Pull Requests
 
-We follow the Git Flow workflow, where all development is done in feature branches and merged to the main branch via pull requests. Pull requests are reviewed by at least one other developer before being merged and must pass all tests and checks before being allowed to merge.
+We follow the Git Flow workflow, where all development is done in feature branches and merged to the main branch via pull requests. Pull requests are reviewed by at least one code owners before being merged and must pass all tests and checks before being allowed to merge.
 
 ## Build and Test
 
