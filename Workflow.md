@@ -1,8 +1,18 @@
 # Development Workflow
 
+## Code Owners
+
+We define ownership of knowledge and responsibilities for code and documentation through specially named `CODEOWNERS` files, which list the usernames of people responsible for a repository. You can find more documentation on [github web site](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+
+The definition of owners across all GridSuite repositories is currently in progress.
+
 ## Pull Requests
 
-We follow the Git Flow workflow, where all development is done in feature branches and merged to the main branch via pull requests. Pull requests are reviewed by at least one other developer before being merged and must pass all tests and checks before being allowed to merge.
+We follow the Git Flow workflow, where all development is done in feature branches and merged to the main branch via pull requests. 
+
+The Pull request  must pass all tests and checks before being allowed to merge.
+
+The pull request must be reviewed and approved by at least one person, and by a code owner before being allowed to merge. As the process of defining code owners is still in progress, the last point applies only for repositories with a CODEOWNERS file.
 
 ## Build and Test
 
