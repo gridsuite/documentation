@@ -55,12 +55,6 @@ Source repository: https://github.com/gridsuite/geo-data-server
 
 This service is responsible of converting CGMES GL (Graphical Layout) profile to GPS coordinates uploaded to geo data server. 
 
-#### ODRE server
-
-This service is responsible for converting GPS coordinates of substations and lines coming from [Open Data Réseau Energies](https://opendata.reseaux-energies.fr/pages/accueil/?flg=fr) system (ODRE) and uploading them to the geo data server. ODRE is a web site (and also a web service with a REST API) where GPS positions of RTE's equipments have been open sourced. 
-
-Source repository: https://github.com/gridsuite/odre-server
-
 #### Network map server
 
 This service is responsible for extracting/filtering/reshaping network data from network store, so that it can be used on the front-end side to feed the network map UI, the spreadsheet and many other UI components that need to display network data (in GridStudy).
@@ -192,23 +186,7 @@ This service is responsible for running a [balances adjustment](https://github.c
 
 Source repository: https://github.com/gridsuite/balances-adjustment-server
 
-#### Merge orchestrator server
 
-This service is responsible for implementing an ENTSOE merging process. It could be based on UCTE files or CGMES files. Merge orchestrator could support several merging configurations at the same time. A merging configuration is a type of process (D-1, D-2, etc) and a list of TSOs to merge. Once the configuration is created, the merge orchestrator waits for required files (called IGM)  to be available (using the RabbitMQ case queue and fed by case server when a new case is available) and when all files are here, starts a merging process. A merging process begins by importing IGMs to network store (meaning that a conversion to IIDM is done), then each IGM is validated using the case validation server, then a topological merge is done (creating a CGM) and finally either a loadflow or a balances adjustment is run on the CGM. The CGM is then ready for download using the GridMerge interface. The goal is also to be able to publish the CGM at the end of the process (to be implemented). The Merge orchestrator server also supports complex IGM replacement strategies (to handle missing cases) using a highly configurable Groovy script. 
-
-Source repository: https://github.com/gridsuite/merge-orchestrator-server
-
-#### Case validation server
-
-This service is responsible for case validation according to Entsoe EMF specifications and is used by the merge orchestrator server.
-
-Source repository: https://github.com/gridsuite/case-validation-server
-
-#### CGMES boundary server
-
-This service is responsible for storing CGMES boundary set files, needed when converting a CGMES file to an IIDM network. Boundary set files have 2 profiles EQ and TP and have a unique ID. Each time a new version of a boundary file is published by the ENTSOE, a new ID is used so that we can keep with this service the full history of boundaries.
-
-Source repository: https://github.com/gridsuite/cgmes-boundary-server
 
 #### Study notification server
 
@@ -228,11 +206,6 @@ Same as study notification server, but to manage config-server notifications. It
 
 Source repository: https://github.com/gridsuite/config-notification-server
 
-#### Merge notification server
-
-Same as study notification server, but for GridMerge asynchronous update.
-
-Source repository: https://github.com/gridsuite/merge-notification-server
 
 #### Monitor server
 
@@ -245,6 +218,7 @@ Source repository: https://github.com/gridsuite/monitor-core
 Executes asynchronous calculations via a pipeline using other computational services provided by GridSuite.
 
 Source repository: https://github.com/gridsuite/monitor-core
+
 #### Gateway
 
 This is the only entry point to the back-end. Front-ends can only send requests to the gateway. All the other web services do not expose their API directly to the front-ends. Requests are routed by the gateway to other micro services. This gateway is mainly responsible for implementing security features: https and user access rights verification.
@@ -266,23 +240,7 @@ It is then possible to retrieve users information given a sub
 
 Source repository: https://github.com/gridsuite/user-identity-oidc-replication-server
 
-#### Case import job
 
-This cron job is responsible for regularly querying a FTP server, to get new cases (in a specific configured directory of the ftp). When new cases are available, they are all uploaded into the case server, so we can consider this job as a bridge between an external FTP and our internal case storage solution. This job keeps track of already imported cases by storing meta infos in a database (which is updated each time new cases are uploaded). Only cases supported by PowSyBl framework are processed.
-
-Source repository: https://github.com/gridsuite/case-import-job
-
-#### CGMES boundary import job
-
-This cron job is responsible for regularly querying a FTP server to get new CGMES boundary files and upload to to CGMES boundary server.
-
-Source repository: https://github.com/gridsuite/cgmes-boundary-import-job
-
-#### CGMES assembling job
-
-This cron job is a variant of the case import job. The main difference is that this job is able to process CGMES cases, profile by profile. So it has the knowledge of CGMES profiles structure and keeps track for each case on which profile is available or not yet. When all profiles are ready, it builds a full consistent CGMES case (a zip file) and uploads it to case server.
-
-Source repository: https://github.com/gridsuite/cgmes-assembling-job
 
 ## Front-ends description
 
