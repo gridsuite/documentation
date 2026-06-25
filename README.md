@@ -9,7 +9,7 @@
 - [Micro-services](MicroServices.md)  
   Detailed description of GridSuite micro-services and frontends.
 
-- [Common libraries](CommonLibraries)
+- [Common libraries](CommonLibraries.md) 
   Detailed description of common libraries used by GridSuite
 
 - [Development workflow](Workflow.md)  
