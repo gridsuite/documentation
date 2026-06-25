@@ -180,13 +180,6 @@ This service is responsible for storing and managing study-related configuration
 
 Source repository: https://github.com/gridsuite/study-config-server
 
-#### Balances adjustment server
-
-This service is responsible for running a [balances adjustment](https://github.com/powsybl/powsybl-balances-adjustment) (coming from PowSyBl) on a network stored by the network store server. This is still an ongoing work as many functionalities are still missing like getting net positions from a [PEFV files](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/schema/PEVF_IG_v1.1.pdf) or getting generation shift keys from a [CRAC file](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/crac/CRAC_implementation_guide_v2r3.pdf).
-
-Source repository: https://github.com/gridsuite/balances-adjustment-server
-
-
 
 #### Study notification server
 
@@ -264,11 +257,6 @@ Frontend to navigate studies in a directory structure.
 
 Source repository: https://github.com/gridsuite/gridexplore-app
 
-### Grid Merge
-
-Frontend for the ENTSO-E merging process.
-
-Source repository: https://github.com/gridsuite/gridmerge-app
 
 ### Grid Monitor
 
