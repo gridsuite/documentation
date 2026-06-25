@@ -9,6 +9,9 @@
 - [Micro-services](MicroServices.md)  
   Detailed description of GridSuite micro-services and frontends.
 
+- [Common libraries](CommonLibraries)
+  Detailed description of common libraries used by GridSuite
+
 - [Development workflow](Workflow.md)  
   Development workflow including pull request process, build and test pipeline, deployment and release process.
 
