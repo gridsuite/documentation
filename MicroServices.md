@@ -239,32 +239,32 @@ Source repository: https://github.com/gridsuite/user-identity-oidc-replication-s
 
 Gridsuite is divided into different front-ends:
 
-### Grid Admin
+### Grid Admin App
 
 Frontend to manage users.
 
 Source repository: https://github.com/gridsuite/gridadmin-app
 
-### Grid Dyna
+### Grid Dyna App
 
 Frontend to use dynamic simulation features of [Dynawo](https://dynawo.github.io/).
 
 Source repository: https://github.com/gridsuite/griddyna-app
 
-### Grid Explore
+### Grid Explore App
 
 Frontend to navigate studies in a directory structure.
 
 Source repository: https://github.com/gridsuite/gridexplore-app
 
 
-### Grid Monitor
+### Grid Monitor App
 
 Frontend for grid monitoring that enables planning, orchestrating, executing, and monitoring computational processes on the electrical grid (e.g., N-k security analysis).
 
 Source repository: https://github.com/gridsuite/gridmonitor-app
 
-### Grid Study
+### Grid Study App
 
 Frontend to create and manage studies. A study is a collection of network modifications and simulation results. It allows users to import cases, create new variants of the initial network, run simulations, and visualize results.
 

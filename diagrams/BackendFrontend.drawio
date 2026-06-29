@@ -25,20 +25,20 @@
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-71" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;dashed=1;fillColor=none;strokeColor=#9673a6;strokeWidth=2;dashPattern=8 4;fontSize=15;fontStyle=2;" value="Dynawo Wrappers" vertex="1">
           <mxGeometry height="162" width="290" x="723" y="670" as="geometry" />
         </mxCell>
-        <mxCell id="rgu2BDKIU-6iCYOQIiJl-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Admin" vertex="1">
-          <mxGeometry height="66" width="120" x="160" y="184" as="geometry" />
+        <mxCell id="rgu2BDKIU-6iCYOQIiJl-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Admin App" vertex="1">
+          <mxGeometry height="66" width="140" x="149" y="184" as="geometry" />
         </mxCell>
-        <mxCell id="3a17f1ce550125da-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Explore" vertex="1">
-          <mxGeometry height="66" width="120" x="160" y="361" as="geometry" />
+        <mxCell id="3a17f1ce550125da-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Explore App" vertex="1">
+          <mxGeometry height="66" width="140" x="149" y="361" as="geometry" />
         </mxCell>
-        <mxCell id="rgu2BDKIU-6iCYOQIiJl-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Study" vertex="1">
-          <mxGeometry height="66" width="120" x="160" y="485" as="geometry" />
+        <mxCell id="rgu2BDKIU-6iCYOQIiJl-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Study App" vertex="1">
+          <mxGeometry height="66" width="140" x="149" y="485" as="geometry" />
         </mxCell>
-        <mxCell id="rgu2BDKIU-6iCYOQIiJl-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Monitor" vertex="1">
-          <mxGeometry height="66" width="120" x="160" y="599" as="geometry" />
+        <mxCell id="rgu2BDKIU-6iCYOQIiJl-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Monitor App" vertex="1">
+          <mxGeometry height="66" width="140" x="149" y="599" as="geometry" />
         </mxCell>
-        <mxCell id="rgu2BDKIU-6iCYOQIiJl-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Dyna" vertex="1">
-          <mxGeometry height="66" width="120" x="160" y="723" as="geometry" />
+        <mxCell id="rgu2BDKIU-6iCYOQIiJl-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=1.5;fontColor=#1E3A8A;" value="Grid Dyna App" vertex="1">
+          <mxGeometry height="66" width="140" x="149" y="723" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=1.5;fontColor=#7C2D12;" value="User Admin Server" vertex="1">
           <mxGeometry height="30" width="275" x="401" y="202" as="geometry" />
@@ -175,7 +175,7 @@
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-45" edge="1" parent="1" source="rgu2BDKIU-6iCYOQIiJl-5" style="rounded=0;html=1;startArrow=none;startFill=0;jettySize=auto;orthogonalLoop=1;edgeStyle=elbowEdgeStyle;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#475569;strokeWidth=1.5;endArrow=block;endFill=1;">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="570" y="555" as="sourcePoint" />
-            <mxPoint x="280" y="530" as="targetPoint" />
+            <mxPoint x="290" y="530" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-46" edge="1" parent="1" source="rgu2BDKIU-6iCYOQIiJl-4" style="endArrow=block;endFill=1;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=elbowEdgeStyle;strokeColor=#475569;strokeWidth=1.5;" target="rgu2BDKIU-6iCYOQIiJl-44" value="">
