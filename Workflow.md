@@ -14,6 +14,20 @@ The Pull request  must pass all tests and checks before being allowed to merge.
 
 The pull request must be reviewed and approved by at least one person, and by a code owner before being allowed to merge. As the process of defining code owners is still in progress, the last point applies only for repositories with a CODEOWNERS file.
 
+Owner reviews are not necessarily full functional reviews: for small changes an owner may simply give a formal approval. For larger contributions (new components, API changes, architectural decisions), the review may be more thorough.
+
+The lifecycle of a pull request is as follows:
+
+1. **Author** — when your PR is ready for review, add the **`waiting-for-review`**
+   label. This is the signal that it is ready to be picked up by an owner.
+2. **Owner assignment** — an owner picks up the PR, **removes** the
+   `waiting-for-review` label, and **assigns themselves** to it.
+3. **Approvals** — the PR needs two approvals to be mergeable:
+  - one from **another developer**, and
+  - one from the **owner**.
+4. **Merge** — once both approvals are in, the **author (developer) can merge**
+   the pull request.
+
 ## Build and Test
 
 All repositories are configured to build, run unit tests, and perform checks on pull requests using GitHub Actions.
