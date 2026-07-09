@@ -3,7 +3,6 @@
 
 You can find here a diagram of the micro-services of the application. The diagram is a simplified view of the system architecture and does not include all the details. For instance, it does not include all the interactions between micro-services. The goal is to give a high-level overview of the system architecture and to show how micro-services are organized.
 
-The diagram does not include technical components like databases, message brokers, gateways, etc.
 
 ![BackendFrontend.drawio.png](diagrams/BackendFrontend.drawio.svg)
 
