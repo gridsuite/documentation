@@ -9,6 +9,8 @@ The diagram does not include technical components like databases, message broker
 
 Some of the micro-services used by gridsuite are PowSyBl micro-services.
 
+Not all the micro-services are exposed to the outside world. Only a selected set of endpoints are exposed to the outside world and front-end applications. For more details, see [Endpoints Exposure Strategy](EndPointsExposureStrategy.md).
+
 ### PowSyBl micro-services
 
 #### Network store server
