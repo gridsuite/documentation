@@ -205,6 +205,12 @@ Enables planning, orchestrating, executing, and monitoring computational process
 
 Source repository: https://github.com/gridsuite/monitor-core
 
+#### Monitor notification server
+
+Same as study notification server, but for GridMonitor asynchronous update.
+
+Source repository: https://github.com/gridsuite/monitor-notification-server
+
 #### Monitor worker server
 
 Executes asynchronous calculations via a pipeline using other computational services provided by GridSuite.
