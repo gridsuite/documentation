@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64; rv:150.0) Gecko/20100101 Firefox/150.0" scale="1" border="0">
   <diagram name="Page-1" id="90a13364-a465-7bf4-72fc-28e22215d7a0">
-    <mxGraphModel dx="3773.5" dy="1211" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="#F1F5F9" math="0" shadow="0">
+    <mxGraphModel dx="3928.5" dy="1305" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="1169" pageHeight="826" background="#F1F5F9" math="0" shadow="0">
       <root>
         <mxCell id="0" style=";html=1;" />
         <mxCell id="1" parent="0" style=";html=1;" />
@@ -104,7 +104,7 @@
           <mxGeometry height="30" width="275" x="730.5" y="363" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-50" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#CCFBF1;strokeColor=#0D9488;strokeWidth=1.5;fontColor=#134E4A;align=center;verticalAlign=middle;fontFamily=Helvetica;" value="Network Map Server" vertex="1">
-          <mxGeometry height="30" width="275" x="1061" y="686" as="geometry" />
+          <mxGeometry height="30" width="275" x="1063.5" y="611" as="geometry" />
         </mxCell>
         <mxCell id="xMU5c71uW4lNuUfY3gx2-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#EDE9FE;strokeColor=#7C3AED;strokeWidth=1.5;fontColor=#4C1D95;" value="Voltage Init Server" vertex="1">
           <mxGeometry height="30" width="275" x="730.5" y="404" as="geometry" />
@@ -119,19 +119,19 @@
           <mxGeometry height="30" width="275" x="1062.5" y="193" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-49" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#CCFBF1;strokeColor=#0D9488;strokeWidth=1.5;fontColor=#134E4A;" value="Report Server" vertex="1">
-          <mxGeometry height="30" width="275" x="1062.5" y="434" as="geometry" />
+          <mxGeometry height="30" width="275" x="1062.5" y="409" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-53" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#CCFBF1;strokeColor=#0D9488;strokeWidth=1.5;fontColor=#134E4A;" value="Actions Server" vertex="1">
-          <mxGeometry height="30" width="275" x="1062.5" y="485" as="geometry" />
+          <mxGeometry height="30" width="275" x="1062.5" y="460" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-55" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#CCFBF1;strokeColor=#0D9488;strokeWidth=1.5;fontColor=#134E4A;" value="Filter Server" vertex="1">
-          <mxGeometry height="30" width="275" x="1062.5" y="535" as="geometry" />
+          <mxGeometry height="30" width="275" x="1062.5" y="510" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-58" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#CCFBF1;strokeColor=#0D9488;strokeWidth=1.5;fontColor=#134E4A;" value="Directory Server" vertex="1">
-          <mxGeometry height="30" width="275" x="1062.5" y="586" as="geometry" />
+          <mxGeometry height="30" width="275" x="1062.5" y="561" as="geometry" />
         </mxCell>
         <mxCell id="rgu2BDKIU-6iCYOQIiJl-78" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#CCFBF1;strokeColor=#0D9488;strokeWidth=1.5;fontColor=#134E4A;" value="Geo Data Server" vertex="1">
-          <mxGeometry height="30" width="275" x="1062.5" y="637" as="geometry" />
+          <mxGeometry height="30" width="275" x="1065" y="659" as="geometry" />
         </mxCell>
         <mxCell id="M4A4NaIu_-oz1vJJ0DFB-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontSize=22;fontStyle=1;fillColor=#E2E8F0;fontColor=#1E293B;strokeColor=#94A3B8;strokeWidth=3;arcSize=2;align=center;fontFamily=Helvetica;" value="Librairies" vertex="1">
           <mxGeometry height="190" width="1441.5" x="-50" y="1020" as="geometry" />
@@ -207,6 +207,9 @@
         </mxCell>
         <mxCell id="NBDyfLgvt-cCKTzcxswh-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#FEF9C3;strokeColor=#D97706;strokeWidth=1.5;fontColor=#92400E;" value="Case Datasource" vertex="1">
           <mxGeometry height="66" width="120" x="1213.5" y="1082" as="geometry" />
+        </mxCell>
+        <mxCell id="e65Eg6Fiq8iCWiwPOyxz-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#CCFBF1;strokeColor=#0D9488;strokeWidth=1.5;fontColor=#134E4A;" value="Cgmes Gl Server" vertex="1">
+          <mxGeometry height="30" width="275" x="1065" y="704" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
