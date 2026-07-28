@@ -12,6 +12,8 @@ Back-end access is done from front-end using http call to REST APIs and WebSocke
 
 You can find more details about the request routing in [RequestRouting.md](RequestRouting.md).
 
+You can find the front-end architecture documentation [here](FrontEnds.md).
+
 ### Technical stack
 
 #### Back-end
@@ -32,17 +34,3 @@ The application can be deployed via:
 
 - Kubernetes. 
 - Docker compose 
-
-
-#### Front-end
-
-Front-ends are web applications based on:
-
-- ReactJS 
-- React Redux
-- Component library: MUI 
-- DeckGL (WebGL based) for large power grid visualisation 
-- OpenID Connect for authentication
-
-
-
