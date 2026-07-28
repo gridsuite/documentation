@@ -2,13 +2,9 @@
 
 This section describes the common libraries used by GridSuite.
 
-## Shared Libraries
+## Backend Libraries
 
-### Commons UI
 
-Library for sharing GridSuite frontend common components. This library is based on MUI and React. It is used by all GridSuite frontends.
-
-Source repository: [https://github.com/gridsuite/commons-ui](https://github.com/gridsuite/commons-ui)
 
 ### Filter
 
@@ -34,7 +30,7 @@ Library for applying network modifications on a network.
 
 Source repository: [https://github.com/gridsuite/network-modification](https://github.com/gridsuite/network-modification)
 
-## Powsybl 
+### Powsybl 
 
 [Powsybl](https://www.powsybl.org/) is a set of open-source libraries for power system modelling and simulation. It is actively used by GridSuite
 
@@ -48,5 +44,21 @@ In particular, the following Powsybl libraries are used by GridSuite:
 - [powsybl-network-store](https://github.com/powsybl/powsybl-network-store)       
 - [powsybl-optimizer](https://github.com/powsybl/powsybl-optimizer)
 - [powsybl-ws-commons](https://github.com/powsybl/powsybl-ws-commons)
+
+
+## Frontend libraries
+
+
+### Commons UI
+
+Library for sharing GridSuite frontend common components. This library is based on MUI and React. It is used by all GridSuite frontends.
+
+Source repository: [https://github.com/gridsuite/commons-ui](https://github.com/gridsuite/commons-ui)
+
+### powsybl-network-viewer
+
+Powsybl Network Viewer is a React component for visualizing electrical networks. It is used by GridSuite frontends.
+
+Source repository: [https://github.com/powsybl/powsybl-network-viewer](https://github.com/powsybl/powsybl-network-viewer)
 
 
