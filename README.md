@@ -12,6 +12,9 @@
 - [Common libraries](CommonLibraries.md) 
   Detailed description of common libraries used by GridSuite
 
+- [GridMonitor](Gridmonitor.md)
+  Functional scope, architecture, module structure, and messaging details for GridMonitor.
+
 - [Development workflow](Workflow.md)  
   Development workflow including pull request process, build and test pipeline, deployment and release process.
 
