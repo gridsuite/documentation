@@ -84,7 +84,7 @@
             <mxPoint x="451.06" y="447.9999999999998" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="85q6lsVLt6ZVehH1Y6Y5-7" connectable="0" parent="DnXCDYrq4xQGqEd9-m0Y-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Manual trigger by an user" vertex="1">
+        <mxCell id="85q6lsVLt6ZVehH1Y6Y5-7" connectable="0" parent="DnXCDYrq4xQGqEd9-m0Y-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Manual trigger by a user" vertex="1">
           <mxGeometry relative="1" x="-0.0256" y="3" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>

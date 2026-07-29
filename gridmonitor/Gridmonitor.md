@@ -1,6 +1,6 @@
 # GridMonitor
 
-GridMonitor is a GridSuite module composed of a frontend and a multi-module Java backend. It schedules, orchestrates, executes, and monitors calculation processes on the electrical grid, such as an N-k security analysis.
+GridMonitor is a GridSuite product composed of a frontend and a multi-module Java backend. It schedules, orchestrates, executes, and monitors calculation processes on the electrical grid, such as an N-k security analysis.
 
 The system exposes a REST API to the frontend, delegates calculations to asynchronous workers through RabbitMQ, and persists execution state in PostgreSQL.
 
@@ -28,15 +28,15 @@ The system exposes a REST API to the frontend, delegates calculations to asynchr
 
 ### Macro
 
-![Simplified GridMonitor architecture](diagrams/gridmonitor/archi_detailed_gridsuite_services.drawio.svg)
+![Macro](diagrams/archi_monitor.drawio.svg)
 
 ### Detailed flows and Gridsuite microservices
 
-![Detailed GridMonitor architecture](diagrams/gridmonitor/archi_monitor.drawio.svg)
+![Detailed flows and Gridsuite microservices](diagrams/archi_detailed_gridsuite_services.drawio.svg)
 
 ### GridMonitor
 
-![GridMonitor service landscape](diagrams/gridmonitor/archi_detailed_monitor_services.drawio.svg)
+![GridMonitor](diagrams/archi_detailed_monitor_services.drawio.svg)
 
 ## Messaging (RabbitMQ)
 
