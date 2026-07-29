@@ -7,6 +7,9 @@ We use 2 different databases: PostgreSQL which is the default solution and Elast
 
 Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication through a RabbitMQ message broker. Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
 
+
+You can find more details about the request routing in [RequestRouting.md](RequestRouting.md).
+
 ### Technical stack
 
 #### Back-end
