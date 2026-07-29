@@ -42,7 +42,7 @@ The system exposes a REST API to the frontend, delegates calculations to asynchr
 
 The system uses **Spring Cloud Stream** with the RabbitMQ binder.
 
-| Direction | Module | Binding                            | Queue (destination)                    | Group |
+| Direction | Module | Binding                            | Exchange (destination)                 | Group |
 | --- | --- |------------------------------------|----------------------------------------| --- |
 | **Publication** | `monitor-server` | `publishRun${worker.process}-out-0` | `monitor.process.${worker.process}.run` | - |
 | **Publication** | `monitor-server` | `publishMonitorUpdate-out-0` | `monitor.update`  | - |
