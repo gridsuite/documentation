@@ -1,0 +1,144 @@
+<mxfile host="Electron">
+  <diagram name="Problem — Default Dispatch (no x-priority)" id="problem-pro">
+    <mxGraphModel dx="1768" dy="1210" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1200" pageHeight="1280" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=23;fontStyle=1;fontColor=#1a1a2e;" value="RabbitMQ Default Dispatch — Problem (no x-priority)" vertex="1">
+          <mxGeometry height="46" width="1200" y="3" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-outer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#555;strokeWidth=2;shadow=1;" value="" vertex="1">
+          <mxGeometry height="248" width="360" x="30" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-title" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#37474f;strokeColor=none;fontColor=#ffffff;fontSize=15;fontStyle=1;align=center;" value="Spring Cloud Stream — Config (per server)" vertex="1">
+          <mxGeometry height="42" width="360" x="30" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="b-single" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#607D8B;strokeColor=none;fontColor=#ffffff;fontSize=14;align=left;spacingLeft=12;" value="&lt;b&gt;consumeRun&lt;/b&gt; — concurrency: 4" vertex="1">
+          <mxGeometry height="42" width="326" x="48" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="b-noprio" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF8F00;fontColor=#E65100;fontSize=13;align=left;spacingLeft=12;fontStyle=2;" value="⚠ No x-priority — all consumers are identical to RabbitMQ" vertex="1">
+          <mxGeometry height="42" width="326" x="48" y="188" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontStyle=2;fontColor=#555;" value="1 binding creates 4 consumers, all with the same default priority" vertex="1">
+          <mxGeometry height="30" width="360" x="30" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="cfg-to-q" edge="1" parent="1" source="cfg-outer" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#aaa;strokeWidth=1.5;dashed=1;endArrow=none;" target="queue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="queue" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=20;fillColor=#FF8F00;strokeColor=#E65100;fontColor=#ffffff;fontSize=22;fontStyle=1;shadow=1;" value="&lt;b&gt;compute.run&lt;/b&gt;" vertex="1">
+          <mxGeometry height="120" width="230" x="85" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="rmq-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=2;fontColor=#E65100;" value="RabbitMQ" vertex="1">
+          <mxGeometry height="26" width="230" x="85" y="566" as="geometry" />
+        </mxCell>
+        <mxCell id="problem" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#F44336;strokeWidth=2;fontSize=16;align=left;spacingLeft=12;spacingRight=10;verticalAlign=middle;" value="&lt;b&gt;Problem:&lt;/b&gt; RabbitMQ cannot distinguish consumers by server. All 4 messages can land on the same server → OOM crash while others are idle." vertex="1">
+          <mxGeometry height="90" width="360" x="30" y="616" as="geometry" />
+        </mxCell>
+        <mxCell id="s1-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F5;strokeColor=#C62828;strokeWidth=2;shadow=1;" value="" vertex="1">
+          <mxGeometry height="240" width="710" x="460" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="s1-hdr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B71C1C;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;align=left;spacingLeft=16;" value="compute-server-1   ⚠ OVERLOADED" vertex="1">
+          <mxGeometry height="42" width="710" x="460" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="s1c0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C62828;strokeColor=none;fontColor=#ffffff;fontSize=14;align=left;spacingLeft=14;" value="consumer 0   |   ▶ processing msg 1" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="s1c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C62828;strokeColor=none;fontColor=#ffffff;fontSize=14;align=left;spacingLeft=14;" value="consumer 1   |   ▶ processing msg 2" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="s1c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C62828;strokeColor=none;fontColor=#ffffff;fontSize=14;align=left;spacingLeft=14;" value="consumer 2   |   ▶ processing msg 3" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="228" as="geometry" />
+        </mxCell>
+        <mxCell id="s1c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C62828;strokeColor=none;fontColor=#ffffff;fontSize=14;align=left;spacingLeft=14;" value="consumer 3   |   ▶ processing msg 4" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="276" as="geometry" />
+        </mxCell>
+        <mxCell id="s2-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9F9FF;strokeColor=#0D47A1;strokeWidth=2;shadow=1;" value="" vertex="1">
+          <mxGeometry height="240" width="710" x="460" y="352" as="geometry" />
+        </mxCell>
+        <mxCell id="s2-hdr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0D47A1;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;align=left;spacingLeft=16;" value="compute-server-2   — idle" vertex="1">
+          <mxGeometry height="42" width="710" x="460" y="352" as="geometry" />
+        </mxCell>
+        <mxCell id="s2c0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 0   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="s2c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 1   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="s2c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 2   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="498" as="geometry" />
+        </mxCell>
+        <mxCell id="s2c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 3   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="546" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9F9FF;strokeColor=#0D47A1;strokeWidth=2;shadow=1;" value="" vertex="1">
+          <mxGeometry height="240" width="710" x="460" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-hdr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0D47A1;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;align=left;spacingLeft=16;" value="compute-server-3   — idle" vertex="1">
+          <mxGeometry height="42" width="710" x="460" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="s3c0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 0   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="672" as="geometry" />
+        </mxCell>
+        <mxCell id="s3c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 1   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="s3c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 2   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="768" as="geometry" />
+        </mxCell>
+        <mxCell id="s3c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 3   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="816" as="geometry" />
+        </mxCell>
+        <mxCell id="s4-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9F9FF;strokeColor=#0D47A1;strokeWidth=2;shadow=1;" value="" vertex="1">
+          <mxGeometry height="240" width="710" x="460" y="892" as="geometry" />
+        </mxCell>
+        <mxCell id="s4-hdr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0D47A1;strokeColor=none;fontColor=#ffffff;fontSize=16;fontStyle=1;align=left;spacingLeft=16;" value="compute-server-4   — idle" vertex="1">
+          <mxGeometry height="42" width="710" x="460" y="892" as="geometry" />
+        </mxCell>
+        <mxCell id="s4c0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 0   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="942" as="geometry" />
+        </mxCell>
+        <mxCell id="s4c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 1   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="s4c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 2   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="1038" as="geometry" />
+        </mxCell>
+        <mxCell id="s4c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#BDBDBD;fontColor=#757575;fontSize=14;align=left;spacingLeft=14;" value="consumer 3   |   waiting" vertex="1">
+          <mxGeometry height="42" width="674" x="478" y="1086" as="geometry" />
+        </mxCell>
+        <mxCell id="arr1" edge="1" parent="1" source="queue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FF6D00;strokeWidth=3;fontColor=#FF6D00;fontSize=13;fontStyle=1;fillColor=#FF6D00;endArrow=block;endFill=1;" target="s1c0" value="msg 1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="500" />
+              <mxPoint x="440" y="153" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr2" edge="1" parent="1" source="queue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FF6D00;strokeWidth=3;fontColor=#FF6D00;fontSize=13;fontStyle=1;fillColor=#FF6D00;endArrow=block;endFill=1;" target="s1c1" value="msg 2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="500" />
+              <mxPoint x="440" y="201" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr3" edge="1" parent="1" source="queue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FF6D00;strokeWidth=3;fontColor=#FF6D00;fontSize=13;fontStyle=1;fillColor=#FF6D00;endArrow=block;endFill=1;" target="s1c2" value="msg 3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="500" />
+              <mxPoint x="440" y="249" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr4" edge="1" parent="1" source="queue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#FF6D00;strokeWidth=3;fontColor=#FF6D00;fontSize=13;fontStyle=1;fillColor=#FF6D00;endArrow=block;endFill=1;" target="s1c3" value="msg 4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="500" />
+              <mxPoint x="440" y="297" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
