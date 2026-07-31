@@ -1,4 +1,3 @@
-
 ## Micro-services description
 
 You can find here a diagram of the micro-services of the application. The diagram is a simplified view of the system architecture and does not include all the details. For instance, it does not include all the interactions between micro-services. The goal is to give a high-level overview of the system architecture and to show how micro-services are organized.
@@ -68,7 +67,7 @@ Source repository: https://github.com/gridsuite/network-modification-server
 
 #### Load flow server
 
-This service is responsible for running a [loadflow](https://en.wikipedia.org/wiki/Power-flow_study) on a network of the network store server. It relies on [PowSyBl loadflow API](https://github.com/powsybl/powsybl-core/tree/main/loadflow/loadflow-api), a generic implementation agnostic API. As a consequence, as soon as a new implementation is available, it can be integrated to this service without adding any new line of code. In the current version, two loadflow implementations are integrated: [Hades2](https://rte-france.github.io/hades2/) which is a free software made by RTE and [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow) a loadflow fully implemented in PowSyBl. A third one, [DynaFlow](https://github.com/dynawo/dynaflow-launcher) is going to be integrated soon. When a loadflow has run on a network, we get results like status, metrics, functional logs and above all, state variables (voltages, flows) updated in the network store.  
+This service is responsible for running a [loadflow](https://en.wikipedia.org/wiki/Power-flow_study) on a network of the network store server. It relies on [PowSyBl loadflow API](https://github.com/powsybl/powsybl-core/tree/main/loadflow/loadflow-api), a generic implementation agnostic API. As a consequence, as soon as a new implementation is available, it can be integrated to this service without adding any new line of code. In the current version, two loadflow implementations are integrated: [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow) a loadflow fully implemented in PowSyBl, and [DynaFlow](https://github.com/dynawo/dynaflow-launcher). When a loadflow has run on a network, we get results like status, metrics, functional logs and above all, state variables (voltages, flows) updated in the network store.
 
 Source repository: https://github.com/gridsuite/loadflow-server
 
