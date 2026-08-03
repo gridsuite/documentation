@@ -3,13 +3,13 @@
 
 ## Table of contents
 
-- [Architecture](Architecture.md)  
+- [Architecture](architecture/Architecture.md)  
   Overview of the system architecture and technical stack
 
-- [Micro-services](MicroServices.md)  
+- [Micro-services](architecture/MicroServices.md)  
   Detailed description of GridSuite micro-services and frontends.
 
-- [Common libraries](CommonLibraries.md) 
+- [Common libraries](architecture/CommonLibraries.md) 
   Detailed description of common libraries used by GridSuite
 
 - [GridMonitor](gridmonitor/Gridmonitor.md)
