@@ -5,10 +5,7 @@ Here is a very high level systems architecture diagram.
 
 We use 2 different databases: PostgreSQL which is the default solution and ElasticSearch for data indexing. In addition to databases, we also use S3 compatible object storage.
 
-Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication through a RabbitMQ message broker. The broker also enables load balancing of computation across multiple service instances:  
-
-- see [RabbitMQ Load Balancing](rabbitmq/rabbit-load-balancing.md))
-- see [RabbitMQ Error Handling](rabbitmq/error-handling.md)
+Most of the micro-services communications rely on synchronous http request (REST APIs), but we also have asynchronous communication through a RabbitMQ message broker. The broker also enables load balancing of computation across multiple service instances , see [RabbitMQ Documentation](rabbitmq/rabbitmq.md) 
 
 Back-end access is done from front-end using http call to REST APIs and WebSocket connections for asynchronous updates.
 
