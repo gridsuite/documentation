@@ -35,6 +35,7 @@ Source repository: https://github.com/powsybl/powsybl-single-line-diagram-server
 
 ### Gridsuite micro-services
 
+
 #### Report server
 
 This service is responsible for storing functional logs. Functional logs unlike technical logs (managed by Slf4j/Logback and EFK stack) are designed to be presented to a user.  They are often less verbose than technical logs and contain meta-data associated to each log (for instance numerical variable values and their unit like MW or A). In the current version of the service, there are very few query capabilities but the aim is to be able to select logs from a time interval, from key types, etc. Each log is associated by a unique identifier (UUID) to a container which can be for instance a study node or a merge from the merge orchestrator server or any kind of application that need to store functional logs.  Functional  Java modeling logs are handled by [PowSyBl reporter API](https://github.com/powsybl/powsybl-core/tree/main/commons/src/main/java/com/powsybl/commons/reporter) and are used in all micro-services that need to create logs. Many of PowSyBl underlying features are capable of generating functional logs by just passing a  `Reporter` by parameter. On front-end side a [generic ReactJs component](https://www.npmjs.com/package/@gridsuite/commons-ui) is available to display functional logs and is already integrated in GridStudy and GridMerge.
@@ -237,6 +238,10 @@ It is then possible to retrieve users information given a sub
 
 Source repository: https://github.com/gridsuite/user-identity-oidc-replication-server
 
+
+#### Case Import server
+
+Source repository: https://github.com/gridsuite/case-import-server
 
 
 ## Front-ends description
