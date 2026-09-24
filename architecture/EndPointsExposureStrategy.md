@@ -38,3 +38,5 @@ The exposed micro-services enforce authorization at endpoint level using Spring 
 * User identity and roles are automatically propagated to downstream micro-services through the headers of outgoing requests, ensuring that authorization information is preserved across service-to-service calls.
 * The security configuration is automatically validated by tests to ensure that all endpoints have an explicit authorization declaration.
 * When interacting directly with a micro-service through Swagger, outside of the gateway, the user identity and roles must be provided explicitly.
+
+For a concrete implementation example, see the [Authorization system - #210](https://github.com/gridsuite/explore-server/pull/210) PR in Explore Server.
