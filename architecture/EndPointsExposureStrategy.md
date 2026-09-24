@@ -39,4 +39,4 @@ The exposed micro-services enforce authorization at endpoint level using Spring 
 * The security configuration is automatically validated by tests to ensure that all endpoints have an explicit authorization declaration.
 * When interacting directly with a micro-service through Swagger, outside of the gateway, the user identity and roles must be provided explicitly.
 
-The implementation of this authorization system for Explore Server can be found in the [Authorization system - #210](https://github.com/gridsuite/explore-server/pull/210).
+The implementation of this authorization system for Explore Server can be found in the [Authorization system - #210](https://github.com/gridsuite/explore-server/pull/210) PR.
