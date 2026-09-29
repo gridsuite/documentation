@@ -33,6 +33,7 @@ The lifecycle of a pull request is as follows:
 
 The approval of another owner is not required if the author or the reviewer is an owner.
 
+To ease the process, developers can contact the owner directly to discuss issues before creating a pull request. This is especially useful for larger contributions, as the owner can provide guidance on design and implementation.
 
 ## Build and Test
 
