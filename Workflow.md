@@ -20,10 +20,10 @@ The code owner is not expected to verify that the code behaves as intended, but 
 
 The lifecycle of a pull request is as follows:
 
-1. **Author** — when your PR is ready and has been reviewed by another developer, add the **`waiting-for-review`**
+1. **Author** — when your PR is ready and has been reviewed by another developer, add the **`waiting-for-owners`**
    label. This is the signal that it is ready to be picked up by an owner.
 2. **Owner assignment** — an owner picks up the PR, **removes** the
-   `waiting-for-review` label, and **assigns themselves** to it.
+   `waiting-for-owners` label, and **assigns themselves** to it.
 3. **Approvals** — the PR needs two approvals to be mergeable:
   - one from **another developer**, and
   - one from an **owner**.
@@ -34,6 +34,18 @@ The lifecycle of a pull request is as follows:
 The approval of another owner is not required if the author or the reviewer is an owner.
 
 To ease the process, developers can contact the owner directly to discuss issues before creating a pull request. This is especially useful for larger contributions, as the owner can provide guidance on design and implementation.
+
+
+### Code owners configuration
+
+To enable Code Owners, add a file named `CODEOWNERS` at the repository root listing the GitHub usernames or teams that own the code. You can use https://github.com/gridsuite/commons-ui/blob/main/CODEOWNERS as an example.
+
+In the repository settings, enable "Require review from Code Owners" by following these steps:
+
+- Open the repository "Settings" tab.
+- Create a branch protection rule named `owners-protection` targeting the pattern`main` (to target main branch).
+- In that rule, enable "Require a pull request before merging" and "Require review from Code Owners".
+
 
 ## Build and Test
 
