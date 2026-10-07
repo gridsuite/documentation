@@ -45,6 +45,7 @@ In the repository settings, enable "Require review from Code Owners" by followin
 - Open the repository "Settings" tab.
 - Create a branch protection rule named `owners-protection` targeting the pattern`main` (to target main branch).
 - In that rule, enable "Require a pull request before merging" and "Require review from Code Owners".
+- Add in the bypass list "Organization admin" and "gridsuite-actions"
 
 
 ## Build and Test
