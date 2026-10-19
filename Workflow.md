@@ -47,6 +47,10 @@ In the repository settings, enable "Require review from Code Owners" by followin
 - In that rule, enable "Require a pull request before merging" and "Require review from Code Owners".
 - Add in the bypass list "Organization admin" and "gridsuite-actions"
 
+## Rulesets
+
+All repositories are configured to use [the same rulesets](https://github.com/gridsuite/.github/blob/main/rulesets/README.md)
+
 
 ## Build and Test
 
