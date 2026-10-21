@@ -5,278 +5,119 @@ You can find here a diagram of the micro-services of the application. The diagra
 
 ![BackendFrontend.drawio.png](diagrams/BackendFrontend.drawio.svg)
 
-Some of the micro-services used by gridsuite are PowSyBl micro-services.
+The diagram organizes the system in two complementary ways:
+- **By application**: each front-end application together with the backend micro-services it directly depends on.
+- **By shared backend domain**: micro-services providing a transversal capability (storage, computation, filtering, etc.) reused by several applications.
 
 Not all the micro-services are exposed to the outside world. Only a selected set of endpoints are exposed to the outside world and front-end applications. For more details, see [Endpoints Exposure Strategy](EndPointsExposureStrategy.md).
 
-### PowSyBl micro-services
+## Applications
+
+### GridAdmin
+
+| Title | Repository | Description |
+|---|---|---|
+| Grid Admin App | [gridadmin-app](https://github.com/gridsuite/gridadmin-app) | Administration front-end for user management, profiles and announcements. Relies on **User Admin Server** for user/profile data, **Config Server** and **Config Notification Server** to persist and sync UI settings, and **User identity OIDC replication server** to display user names. |
+| User Admin Server | [user-admin-server](https://github.com/gridsuite/user-admin-server) | Backend for **Grid Admin App**: manages user lifecycle, role-based access control, and user profiles (bundling parameter sets and operation quotas). |
+| User identity OIDC replication server | [user-identity-oidc-replication-server](https://github.com/gridsuite/user-identity-oidc-replication-server) | Used by **Grid Admin App** (and other front-ends) to resolve a user's `sub` to a display name, without querying the identity provider directly. |
+| Config Server | [config-server](https://github.com/gridsuite/config-server) | Used by **Grid Admin App** (and all front-ends) to persist per-user UI configuration parameters across machines and browsers. |
+| Config Notification Server | [config-notification-server](https://github.com/gridsuite/config-notification-server) | Pushes configuration update notifications and global announcements to **Grid Admin App** (and all front-ends) via WebSocket. |
+
+### GridExplore
+
+| Title | Repository | Description |
+|---|---|---|
+| Grid Explore App | [gridexplore-app](https://github.com/gridsuite/gridexplore-app) | File/directory management front-end: directory navigation, element management (studies, cases, filters, …), study/case creation, and sharing permissions. Relies on **Explore Server** as its backend entry point and **Directory Notification Server** for real-time directory updates. |
+| Explore Server | [explore-server](https://github.com/gridsuite/explore-server) | Backend entry point for **Grid Explore App**: orchestrates requests to the other data services (studies, cases, filters, contingency lists, …) and the directory tree organising them. |
+| Directory Notification Server | [directory-notification-server](https://github.com/gridsuite/directory-notification-server) | Pushes directory/element update events to **Grid Explore App** via WebSocket, applying per-user visibility and filtering rules. |
+
+### GridStudy
+
+| Title | Repository | Description |
+|---|---|---|
+| Grid Study App | [gridstudy-app](https://github.com/gridsuite/gridstudy-app) | Front-end to create and manage studies: import cases, create network variants, run simulations, and visualize network data and results. Relies on **Study Server** as its backend entry point, **Study Notification Server** for live updates, and **Study Config Server** for display/layout preferences. |
+| Study Server | [study-server](https://github.com/gridsuite/study-server) | Backend entry point for **Grid Study App**: manages power system studies, with root networks organised in a network modification tree, dispatching requests to downstream services. |
+| Study Notification Server | [notification-server](https://github.com/gridsuite/notification-server) | Forwards study-related update messages (and user quota updates) to **Grid Study App** via WebSocket. |
+| Study Config Server | [study-config-server](https://github.com/gridsuite/study-config-server) | Stores **Grid Study App**'s user-defined display and layout configurations: spreadsheet configurations, network visualization parameters, diagram grid layouts, workspaces and computation result filters. |
+
+### GridMonitor
+
+| Title | Repository | Description |
+|---|---|---|
+| Grid Monitor App | [gridmonitor-app](https://github.com/gridsuite/gridmonitor-app) | Front-end used to configure, compare and launch grid monitoring calculation processes (e.g. N-k security analysis) and monitor their execution. Relies on **Monitor Server** (BFF), **Monitor Worker Server** (computation execution) and **Monitor Notification Server** (live status updates). |
+| Monitor Server | [monitor-core](https://github.com/gridsuite/monitor-core) | BFF for **Grid Monitor App**: manages process configurations, launches executions asynchronously, tracks execution/step statuses in PostgreSQL, and publishes run requests to RabbitMQ. |
+| Monitor Worker Server | [monitor-core](https://github.com/gridsuite/monitor-core) | Executes the computation pipelines (e.g. load flow, security analysis) triggered via the Monitor Server on behalf of **Grid Monitor App**, updates statuses, and stores results or debug artifacts. |
+| Monitor Notification Server | [monitor-notification-server](https://github.com/gridsuite/monitor-notification-server) | Pushes process execution status updates to **Grid Monitor App** via WebSocket. |
+
+### GridRT
+
+| Title | Repository | Description |
+|---|---|---|
+| Grid RT App | [gridrt-app](https://github.com/gridsuite/gridrt-app) | Front-end to manage the snapshot refiner process: configure and launch the process, monitor its status in real time, and view results and logs. Consumes the REST API exposed by the **Snapshot Refiner Server**. |
+| Snapshot Refiner Server | Not available yet | |
+
+### GridDyna
+
+| Title | Repository | Description |
+|---|---|---|
+| Grid Dyna App | [griddyna-app](https://github.com/gridsuite/griddyna-app) | Creates a mapping between network equipment and their dynamic model representation, generating `.dyd`/`.par` files for dynamic simulators and previewing how equipment will be modeled. Relies on **Dyna Mapping Server** to resolve mappings between network equipment and dynamic models. |
+| Dyna Mapping Server | [dynamic-mapping-server](https://github.com/gridsuite/dynamic-mapping-server) | Backend for **Grid Dyna App**: maps network equipment to dynamic simulation models used by dynamic simulation tools (e.g. Dynawo). Manages mappings, dynamic models (parameters, variables) and exports parameter sets to the `.par` format. |
+
+## Shared backend services
+
+### Network storage
+
+| Title | Repository | Description |
+|---|---|---|
+| Network Store Server | [powsybl-network-store-server](https://github.com/powsybl/powsybl-network-store-server) | Database-backed implementation of the PowSyBl Core Network API (IIDM model), persisting networks in PostgreSQL instead of in memory. Used together with the `network-store-client` library. |
+| Network Conversion Server | [powsybl-network-conversion-server](https://github.com/powsybl/powsybl-network-conversion-server) | Imports cases into the network store and exports networks back to case files, using PowSyBl importers/exporters. Indexes equipment in Elasticsearch and posts functional logs to the report-server during import. |
+| Case Server | [powsybl-case-server](https://github.com/powsybl/powsybl-case-server) | Stores and serves power network case files in any format supported by PowSyBl (CGMES, UCTE, XIIDM, Matpower, IEEE-CDF, …). Archives are extracted and sub-files stored compressed in S3. |
+| Geo Data Server | [geo-data-server](https://github.com/gridsuite/geo-data-server) | Manages geographical data (GPS coordinates) for substations and lines of a network. Computes missing substation positions with a centroid-based algorithm and falls back to default country-level positions. |
+| Cgmes Gl Server | [cgmes-gl-server](https://github.com/gridsuite/cgmes-gl-server) | Extracts geographical position data (substation and line positions) from CGMES cases' GL profile and pushes the extracted coordinates to the geo-data-server. |
+| Case Import Server | [case-import-server](https://github.com/gridsuite/case-import-server) | Provides a single REST endpoint to import a case file and automatically store it in a target directory of the GridSuite tree, based on the declared origin of the file, forwarding storage to case-server and directory-server. |
+
+### Network Computation
+
+| Title | Repository | Description |
+|---|---|---|
+| Short-Circuit Server | [shortcircuit-server](https://github.com/gridsuite/shortcircuit-server) | Simulates electrical faults on a network (whole network or a specific bus) and computes resulting short-circuit currents, feeder contributions, and limit violations for protection device validation. |
+| Security Analysis Server | [security-analysis-server](https://github.com/gridsuite/security-analysis-server) | Runs security analysis computations, simulating a set of contingencies and detecting the resulting limit violations (current, voltage, active power), using configurable providers (OpenLoadFlow, DynaFlow). |
+| Load Flow Server | [loadflow-server](https://github.com/gridsuite/loadflow-server) | Runs load flow computations on a network using configurable providers (OpenLoadFlow, DynaFlow). Detects and stores limit violations and computes energy balance per connected component and per country. |
+| Voltage Init Server | [voltage-init-server](https://github.com/gridsuite/voltage-init-server) | Computes an optimal starting voltage profile (magnitudes and angles) using PowSyBl Optimizer, then translates the result into network modifications (setpoints, tap positions, …) sent to network-modification-server. |
+| State Estimator Server | Not available yet | |
+| Dynamic Simulation Server | [dynamic-simulation-server](https://github.com/gridsuite/dynamic-simulation-server) | Runs dynamic simulation (time-domain) computations, building a dynamic model of the network from a mapping, applying events, and running a Dynawo-based provider. Entry point of the dynamic computation chain. |
+| Dynamic Security Analysis Server | [dynamic-security-analysis-server](https://github.com/gridsuite/dynamic-security-analysis-server) | Extends a dynamic simulation result by evaluating the impact of a set of contingencies on top of its output state, using a Dynawo-based dynamic security analysis provider. |
+| Dynamic Margin Calculator Server | [dynamic-margin-calculation-server](https://github.com/gridsuite/dynamic-margin-calculation-server) | Evaluates, through successive load increases, the maximum load level a network can sustain before contingencies lead to a critical loss of stability, relying on the dynamic-simulation and dynamic-security-analysis servers. |
+
+### Network filtering and modification
+
+| Title | Repository | Description |
+|---|---|---|
+| Network Modification Server | [network-modification-server](https://github.com/gridsuite/network-modification-server) | Stores and applies network modifications, organised in groups tied to a study variant. Supports composite (reusable) modifications and applying changes immediately or as part of a full variant build. |
+| Filter Server | [filter-server](https://github.com/gridsuite/filter-server) | Stores and instantiates filters (sets of network equipment), used to configure modifications, contingency lists, and to filter data in the UI. Evaluates filters against a network and returns matched equipment. |
+| Actions Server | [actions-server](https://github.com/gridsuite/actions-server) | Stores and instantiates contingency lists (identifier-based and filter-based), used by security and sensitivity analyses. Evaluates contingency lists against a network and exports them in PowSyBl JSON format. |
+
+### Elements directory with permissions
+
+| Title | Repository | Description |
+|---|---|---|
+| Directory Server | [directory-server](https://github.com/gridsuite/directory-server) | Manages the hierarchical directory tree in which user resources (studies, filters, contingency lists, …) are organised, along with the access permissions (READ/WRITE/MANAGE) controlling who can browse or modify each directory. |
+
+### UI Preparation
+
+| Title | Repository | Description |
+|---|---|---|
+| Single Line Diagram Server | [powsybl-single-line-diagram-server](https://github.com/powsybl/powsybl-single-line-diagram-server) | Generates single-line diagrams (voltage level or substation) and network area diagrams (NAD) from a network stored in the network store, with automatic layout options. |
+| Network Map Server | [network-map-server](https://github.com/gridsuite/network-map-server) | Read-only projection layer between the PowSyBl IIDM model and the UI. Exposes network equipment at different levels of detail (`MAP`, `TOOLTIP`, `TAB`, `FORM`, `OPERATING_STATUS`) so each UI context only receives the data it needs. |
+
+### Business Logs
+
+| Title | Repository | Description |
+|---|---|---|
+| Report Server | [report-server](https://github.com/gridsuite/report-server) | Stores and serves hierarchical computation reports (`ReportNode` trees) produced by PowSyBl-based calculations. Exposes them back through REST endpoints for display in the front-end (full tree view, paginated logs, aggregated severities, search). |
 
-#### Network store server
+### Time Series Storage
 
-This service is responsible for storing network in [IIDM](https://www.powsybl.org/pages/documentation/grid/model/) format. Each of the network elements is stored in its own table indexed by its ID and voltage level ID allowing 3 levels of query for a given network: all elements, an element from its ID, all elements belonging to a substation voltage level. This web service is not intended to be accessed directly though its REST API but rather using the Java Client. The java Client is an alternative implementation of the [IIDM Java API](https://github.com/powsybl/powsybl-core/tree/main/iidm/iidm-api) (alternative regarding the original in memory one from PowSyBl) and can be found in the [network-store-iidm-impl](https://github.com/powsybl/powsybl-core/tree/main/iidm/iidm-impl) module of the repository. An integration of the Java client into Spring framework is also available in the [network-store-client](https://github.com/powsybl/powsybl-network-store/tree/main/network-store-client) module.
-
-Source repository: https://github.com/powsybl/powsybl-network-store-server
-
-#### Case server
-
-This service is responsible for storing cases in any of the PowSyBl supported formats (CGMES, UCTE, XIIDM, etc). Cases are just files and in the current version are stored on a file system. Our goal is to migrate to an object storage solution (like minIO) and to access it via a standard API like Amazon S3 API. Cases can be stored in 2 different spaces: one "public" and one "private". Cases from the public space are accessible to any other services and all public cases can be listed and loaded without any restriction. Cases from private space are assigned to a unique identifier (UUID) when loaded to the case server and can only be retrieved knowing this identifier. There is no way to list all private cases. When a new case is uploaded to the server, it is also indexed into an ElasticSearch database so that we can query the case server (using the REST API) for searching cases matching some provided criteria. In the current version, we only support simple index attributes coming from the case file name (like date, TSO, country, etc). In a future version, we will add more index attributes coming from the case content (like network element IDs, consumption or generation level, etc). Also, a message is sent to the RabbitMQ broker each time a case is uploaded, so that other services can trigger some processing as soon as a new case that meets some criteria enters into the system.
-
-Source repository: https://github.com/powsybl/powsybl-case-server
-
-#### Network conversion server
-
-This service is responsible for importing/exporting cases to/from the network store. Supported case importers and exporters are [the ones available from PowSyBl](https://www.powsybl.org/pages/documentation/index.html#grid-formats). The case is provided to the API either by providing the full case file (as binary data) or by just referencing to a case already uploaded to the case server. During the case conversion, functional logs are generated. Once conversion has been done and network fully stored to network store server, functional logs are sent to the report server for later analysis, search or visualization.
-
-Source repository: https://github.com/powsybl/powsybl-network-conversion-server
-
-#### Single line diagram server
-
-This service is responsible for generating single line diagrams either for a voltage level or for a full substation using a network stored into the network store server. Single line diagram generation feature is provided by a [PowSyBl component](https://github.com/powsybl/powsybl-diagram). A single line diagram consists of one SVG file and additional meta-data (mainly to keep links with network elements and original network IDs).
-
-Source repository: https://github.com/powsybl/powsybl-single-line-diagram-server
-
-### Gridsuite micro-services
-
-
-#### Report server
-
-This service is responsible for storing functional logs. Functional logs unlike technical logs (managed by Slf4j/Logback and EFK stack) are designed to be presented to a user.  They are often less verbose than technical logs and contain meta-data associated to each log (for instance numerical variable values and their unit like MW or A). In the current version of the service, there are very few query capabilities but the aim is to be able to select logs from a time interval, from key types, etc. Each log is associated by a unique identifier (UUID) to a container which can be for instance a study node or a merge from the merge orchestrator server or any kind of application that need to store functional logs.  Functional  Java modeling logs are handled by [PowSyBl reporter API](https://github.com/powsybl/powsybl-core/tree/main/commons/src/main/java/com/powsybl/commons/reporter) and are used in all micro-services that need to create logs. Many of PowSyBl underlying features are capable of generating functional logs by just passing a  `Reporter` by parameter. On front-end side a [generic ReactJs component](https://www.npmjs.com/package/@gridsuite/commons-ui) is available to display functional logs and is already integrated in GridStudy and GridMerge.
-
-Source repository: https://github.com/gridsuite/report-server
-
-#### Geo data server
-
-This service is responsible for storing network related geographical data. There are two kinds of geographical data: substation data and line data. Substation geographical data are just one GPS (WGS84) coordinate associated to a substation ID. Line geographical data are a list of GPS coordinates corresponding to the position of all the pylons (so substation position at both side are not included) of the line. When data is queried for a specific network, missing data are automatically created. For substations, missing coordinates are computed from neighboring substations using a centroid algorithm. For lines, coordinates are not required by the front-end (a straight line is drawn in case of missing data) and different fixing algorithms are used in case of inconsistent data: for instance when the list of pylon coordinates does not allow the creation of a polyline (because of missing segments). 
-
-Source repository: https://github.com/gridsuite/geo-data-server
-
-#### CGMES GL server
-
-- Source repository: https://github.com/gridsuite/cgmes-gl-server
-
-This service is responsible of converting CGMES GL (Graphical Layout) profile to GPS coordinates uploaded to geo data server. 
-
-#### Network map server
-
-This service is responsible for extracting/filtering/reshaping network data from network store, so that it can be used on the front-end side to feed the network map UI, the spreadsheet and many other UI components that need to display network data (in GridStudy).
-
-Source repository: https://github.com/gridsuite/network-map-server
-
-#### Network modification server
-
-This service is responsible for storing and applying modifications to a network of the network store server. This is one of the most important service of the application as it implements many business logic for modifying the network. There are many kinds of modifications supported by this service like network element creation (substation, voltage level, generator, load, etc), network element removal, switch opening or closing, line or transformer triggering or locking out, network element elementary modification (like a target value modification, or a tap position modification). Only a very small number of expected possible modifications have yet been implemented with many more to come in the future. Network modifications have a unique ID (UUID) and could be associated to a group which has itself a unique ID (UUID) and this is how a set of network modifications is referenced by other web services. Depending on the use case a network modification can be stored only or can be both stored and applied to a network  (given a network ID in the network store) or just selected from the database and applied to a network. When a modification is applied to a network functional logs are created to give more informations to the users and sent to the report server for later use.
-
-Source repository: https://github.com/gridsuite/network-modification-server
-
-#### Load flow server
-
-This service is responsible for running a [loadflow](https://en.wikipedia.org/wiki/Power-flow_study) on a network of the network store server. It relies on [PowSyBl loadflow API](https://github.com/powsybl/powsybl-core/tree/main/loadflow/loadflow-api), a generic implementation agnostic API. As a consequence, as soon as a new implementation is available, it can be integrated to this service without adding any new line of code. In the current version, two loadflow implementations are integrated: [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow) a loadflow fully implemented in PowSyBl, and [DynaFlow](https://github.com/dynawo/dynaflow-launcher). When a loadflow has run on a network, we get results like status, metrics, functional logs and above all, state variables (voltages, flows) updated in the network store.
-
-Source repository: https://github.com/gridsuite/loadflow-server
-
-#### Action server
-
-This service is responsible for storing and instantiating contingency lists. Contingencies are used by security analysis to describe network elements that we want to simulate the loss of. We support two main types of contingency lists:  form-based and script-based. A form-based contingency list is described by an element type (generator, line, etc) and some filtering criteria (country, nominal voltage, etc), so it needs to be instantiated with a specific network to be used in a security analysis. A script-based contingency list is a [Groovy](https://groovy-lang.org) script where the network is exposed as a global variable so that the user can write in Groovy the logic to generate contingencies from network elements.
-
-Source repository: https://github.com/gridsuite/actions-server
-
-#### Filter server
-
-This service is responsible for storing and instantiating filters. Filters are just sets of network elements and will be used in many places in the application: to help configuring network modifications, to filter data in the UIs, etc. The overall design of filters is very close to contingency lists: there are form-based and Groovy-script-based filters.
-
-Source repository: https://github.com/gridsuite/filter-server
-
-#### Security analysis server
-
-This service is responsible for running a security analysis and storing resulting limit violations. A security analysis is based on loadflow calculations on a set of post-contingency states. When running a security analysis we need a network ID from the network store server, a contingency list ID from the action server and then we get a unique result ID. Thanks to this result ID we can get the calculation status (running, complete, failed, etc) and then once the calculation is complete we can get full limit violation results. As for loadflow calculation we rely on [PowSyBl security analysis API](https://github.com/powsybl/powsybl-core/tree/main/security-analysis/security-analysis-api) and we support two implementations, one based on [Hades2](https://rte-france.github.io/hades2/) and the other one based on [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow), [DynaFlow](https://github.com/dynawo/dynaflow-launcher) implementation will come soon. Security analyses are generally long time running calculations (few minutes length), this is why a special design has been implemented to be able to run asynchronous calculations and to allow performance scaling by running many server replicas. When a new calculation is asked using the REST API, a message is posted on a RabbitMQ queue, then a worker service (could have many instances of it across multiple replicas of the service in the cluster) takes the message and runs the calculation. Once the calculation is complete, results are written back to the database and a message is posted to another queue of the broker so that other web services can be notified when security analysis results are available.
-
-Source repository: https://github.com/gridsuite/security-analysis-server
-
-#### Sensitivity analysis server
-
-This service is responsible for running a sensitivity analysis and storing resulting sensitivity factors, sensitivity values and contingency statuses. 
-A sensitivity analysis is based on loadflow calculations on a list of sensitivity factors, a list of contingencies and a list of sensitivity variable sets. 
-When running a sensitivity analysis we need a network ID from the network store server, and a configuration containing multiple filter ID 
-from the filter server, multiple contingency list ID from the actions server and then we get a unique result ID. 
-Thanks to this result ID we can get the calculation status (running, complete, failed, etc) and then once the calculation is complete we can get full results. 
-As for loadflow calculation we rely on [PowSyBl sensitivity analysis API](https://github.com/powsybl/powsybl-core/tree/main/sensitivity-analysis-api)
-and we support two implementations, one based on [Hades2](https://rte-france.github.io/hades2/) and the other one based 
-on [OpenLoadFlow](https://github.com/powsybl/powsybl-open-loadflow). Sensitivity analyses are generally long time running calculations (few minutes length), this is why a special design has been implemented 
-to be able to run asynchronous calculations and to allow performance scaling by running many server replicas. When a new calculation 
-is asked using the REST API, a message is posted on a RabbitMQ queue, then a worker service (could have many instances of it across multiple replicas of the service in the cluster) 
-takes the message and runs the calculation. Once the calculation is complete, results are written back to the database and a message is posted 
-to another queue of the broker so that other web services can be notified when sensitivity analysis results are available.
-
-Source repository: https://github.com/gridsuite/sensitivity-analysis-server
-
-#### Short-circuit server
-
-This service is responsible for running a short-circuit analysis and storing resulting short-circuit violations. As for loadflow calculation we rely on [PowSyBl shortcircuit API](https://github.com/powsybl/powsybl-core/tree/main/shortcircuit-api). A short-circuit computation model is required to be executed behind the API. As security and sensibility analyses, short-circuit calculations are ran asynchronously. When running a short-circuit analysis we need a network ID from the network store server and then we get a unique result ID. Thanks to this result ID we can get the calculation status (running, complete, failed, etc) and then once the calculation is complete we can get full violation results. When a new calculation is asked using the REST API, a message is posted on a RabbitMQ queue, then a worker service (could have many instances of it across multiple replicas of the service in the cluster) takes the message and runs the calculation. Once the calculation is complete, results are written back to the database and a message is posted to another queue of the broker so that other web services can be notified when short-circuit analysis results are available.
-
-Source repository: https://github.com/gridsuite/shortcircuit-server
-
-#### Voltage init server
-
-This service is responsible for running a voltage initialization calculation. 
-
-Source repository: https://github.com/gridsuite/voltage-init-server
-
-#### Directory server
-
-This service is responsible for managing a file system like the hierarchy of directories where other kind of data managed by other micro-services (studies, contingency lists, filters called directory elements) can be referenced using their unique IDs. When added to a directory an element is associated to a name, an owner and a description. Access rights are only managed through directories and in the current version they are only implemented by a "private" attribute. A private directory is accessible with all its contents (some elements, or some sub-directories) to its owner only. A non private directory is implicitly a public directory and access is granted to all users.
-
-Source repository: https://github.com/gridsuite/directory-server
-
-#### Time-series server
-
-This service is responsible for storing time-series data. It is used to persist the output data of dynamic simulations which are displayed later in GridStudy.
-
-Source repository: https://github.com/gridsuite/timeseries-server
-
-#### Dynamic simulation server
-
-This service is responsible for running dynamic simulations. It is based on [PowSyBl dynamic simulation API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-simulation/dynamic-simulation-api) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo). 
-
-Source repository: https://github.com/gridsuite/dynamic-simulation-server
-
-#### Dynamic security analysis server
-
-This service is responsible for running dynamic security analysis. It is based on [PowSyBl dynamic security analysis API](https://github.com/powsybl/powsybl-core/tree/main/dynamic-security-analysis) and [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo).
-
-Source repository: https://github.com/gridsuite/dynamic-security-analysis-server
-
-#### Dynamic margin calculation server
-
-This service is responsible for running dynamic margin calculation. It is based on [Dynawo implementation](https://github.com/powsybl/powsybl-dynawo).
-
-Source repository: https://github.com/gridsuite/dynamic-margin-calculation-server
-
-#### Dynamic mapping server
-
-This service is responsible for configuring how dynamic data is mapped to a network.
-
-Source repository: https://github.com/gridsuite/dynamic-mapping-server
-
-#### Study server
-
-This service is responsible for managing studies and it is the main back-end entry point for GridStudy. This is why this service can connect to many other services. A study is created from the import of a case which is then stored in the network store server. A study is then persisted to database with a link to the imported network. One of the greatest feature of study server is the ability to create new variants of the initial network and run simulations on it. So, we have a network modification tree model associated to each study.  We are able to create new nodes, either a modification node or a calculation node. A modification node is associated to a group of modifications (stored in the modification server), it can be 'built' i.e. instantiated by taking previous network and applying the modifications. This network build relies on IIDM variant feature. A calculation node is associated to a list of simulator and can also be built by running the simulations. Simulations results (loadflow, security analysis) are linked to calculation node, to be displayed later in the GridStudy UI. Unlike most of the other web services, the study server has been implemented using Spring WebFlux so using reactive programming (Spring reactor). As an entry point for all study related requests, it is expected to have a higher request throughput than most of the other web services. The data access layer is based on classic JPA which is not reactive, so the implementation is not fully reactive. 
-
-Source repository: https://github.com/gridsuite/study-server
-
-#### Explore server
-
-This service is responsible for managing users data. This is the back-end entry point for GridExplore front-end. The main goal of this service is to aggregate and  coordinate requests to the directory server and the other data services (in the current version: study server, action server and filter server, more to come). 
-
-Source repository: https://github.com/gridsuite/explore-server
-
-#### Config server
-
-This service is responsible for storing parameters coming from GridSuite front-ends. A parameter is a key value (String, String) type data associated to a user and an application (just a String like 'study' or 'merge'). Thanks to this service, front-ends can have their states saved (like options in parameters dialog) and users are able to keep the same UI configuration on different machines and browsers.
-
-Source repository: https://github.com/gridsuite/config-server
-
-#### Study config server
-
-This service is responsible for storing and managing study-related configurations, like spreadsheet configuration and network visualization parameters. A spreadsheet configuration is a set of columns that can be used to display network data in a tabular form. This service is used by GridStudy and GridExplore front-ends.
-
-Source repository: https://github.com/gridsuite/study-config-server
-
-
-#### Study notification server
-
-This service is responsible for filtering and forwarding messages from 'study' queue of the RabbitMQ broker to a WebSocket endpoint. This WebSocket endpoint is used by the GridStudy front-end for asynchronous update of the UI component. Only part of the back-end study, relevant for UI update is forwarded. 
-
-Source repository: https://github.com/gridsuite/notification-server
-
-#### Directory notification server
-
-Same as study notification server, but for GridExplore asynchronous update.
-
-Source repository: https://github.com/gridsuite/directory-notification-server
-
-#### Config notification server
-
-Same as study notification server, but to manage config-server notifications. It is used by all front-ends.
-
-Source repository: https://github.com/gridsuite/config-notification-server
-
-
-#### Monitor server
-
-Enables planning, orchestrating, executing, and monitoring computational processes on the electrical grid (for example, N-k security analysis). The processes are executed in the Monitor worker servers.
-
-Source repository: https://github.com/gridsuite/monitor-core
-
-#### Monitor notification server
-
-Same as study notification server, but for GridMonitor asynchronous update.
-
-Source repository: https://github.com/gridsuite/monitor-notification-server
-
-#### Monitor worker server
-
-Executes asynchronous calculations via a pipeline using other computational services provided by GridSuite.
-
-Source repository: https://github.com/gridsuite/monitor-core
-
-#### Gateway
-
-This is the only entry point to the back-end. Front-ends can only send requests to the gateway. All the other web services do not expose their API directly to the front-ends. Requests are routed by the gateway to other micro services. This gateway is mainly responsible for implementing security features: https and user access rights verification.
-
-Source repository: https://github.com/gridsuite/gateway
-
-#### User admin server
-
-This service is responsible for storing a list of users authorized to access the application and storing also users connection information.
-It is used by the gateway service to check access authorization.
-
-Source repository: https://github.com/gridsuite/user-admin-server
-
-#### User identity OIDC replication server
-
-This service is responsible for storing a list of users information.
-The gateway use this API to store users information coming from oidc profiles in idtokens.
-It is then possible to retrieve users information given a sub
-
-Source repository: https://github.com/gridsuite/user-identity-oidc-replication-server
-
-
-#### Case Import server
-
-Source repository: https://github.com/gridsuite/case-import-server
-
-
-## Front-ends description
-
-Gridsuite is divided into different front-ends:
-
-### Grid Admin App
-
-Frontend to manage users.
-
-Source repository: https://github.com/gridsuite/gridadmin-app
-
-### Grid Dyna App
-
-Frontend to use dynamic simulation features of [Dynawo](https://dynawo.github.io/).
-
-Source repository: https://github.com/gridsuite/griddyna-app
-
-### Grid Explore App
-
-Frontend to navigate studies in a directory structure.
-
-Source repository: https://github.com/gridsuite/gridexplore-app
-
-
-### Grid Monitor App
-
-Frontend for grid monitoring that enables planning, orchestrating, executing, and monitoring computational processes on the electrical grid (e.g., N-k security analysis).
-
-Source repository: https://github.com/gridsuite/gridmonitor-app
-
-### Grid Study App
-
-Frontend to create and manage studies. A study is a collection of network modifications and simulation results. It allows users to import cases, create new variants of the initial network, run simulations, and visualize results.
-
-Source repository: https://github.com/gridsuite/gridstudy-app
+| Title | Repository | Description |
+|---|---|---|
+| Timeseries Server | [timeseries-server](https://github.com/gridsuite/timeseries-server) | Generic, computation-agnostic storage for PowSyBl time series. Producers (e.g. dynamic-simulation-server) submit a batch of time series and get a group id; consumers later fetch the metadata or data, optionally filtered. |
