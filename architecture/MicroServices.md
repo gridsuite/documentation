@@ -9,7 +9,7 @@ The diagram organizes the system in two complementary ways:
 - **By application**: each front-end application together with the backend micro-services it directly depends on.
 - **By shared backend domain**: micro-services providing a transversal capability (storage, computation, filtering, etc.) reused by several applications.
 
-Not all the micro-services are exposed to the outside world. Only a selected set of endpoints are exposed to the outside world and front-end applications. For more details, see [Endpoints Exposure Strategy](EndPointsExposureStrategy.md).
+Not all the micro-services are exposed to the outside world. Only a selected set of endpoints are exposed to the outside world and front-end applications, through the **Gateway**, which is the only backend component directly reachable by front-end applications. For more details, see [Endpoints Exposure Strategy](EndPointsExposureStrategy.md).
 
 ## Applications
 
@@ -19,9 +19,6 @@ Not all the micro-services are exposed to the outside world. Only a selected set
 |---|---|---|
 | Grid Admin App | [gridadmin-app](https://github.com/gridsuite/gridadmin-app) | Administration front-end for user management, profiles and announcements. Relies on **User Admin Server** for user/profile data, **Config Server** and **Config Notification Server** to persist and sync UI settings, and **User identity OIDC replication server** to display user names. |
 | User Admin Server | [user-admin-server](https://github.com/gridsuite/user-admin-server) | Backend for **Grid Admin App**: manages user lifecycle, role-based access control, and user profiles (bundling parameter sets and operation quotas). |
-| User identity OIDC replication server | [user-identity-oidc-replication-server](https://github.com/gridsuite/user-identity-oidc-replication-server) | Used by **Grid Admin App** (and other front-ends) to resolve a user's `sub` to a display name, without querying the identity provider directly. |
-| Config Server | [config-server](https://github.com/gridsuite/config-server) | Used by **Grid Admin App** (and all front-ends) to persist per-user UI configuration parameters across machines and browsers. |
-| Config Notification Server | [config-notification-server](https://github.com/gridsuite/config-notification-server) | Pushes configuration update notifications and global announcements to **Grid Admin App** (and all front-ends) via WebSocket. |
 
 ### GridExplore
 
@@ -65,16 +62,17 @@ Not all the micro-services are exposed to the outside world. Only a selected set
 
 ## Shared backend services
 
-### Network storage
+### Business Logs
 
 | Title | Repository | Description |
 |---|---|---|
-| Network Store Server | [powsybl-network-store-server](https://github.com/powsybl/powsybl-network-store-server) | Database-backed implementation of the PowSyBl Core Network API (IIDM model), persisting networks in PostgreSQL instead of in memory. Used together with the `network-store-client` library. |
-| Network Conversion Server | [powsybl-network-conversion-server](https://github.com/powsybl/powsybl-network-conversion-server) | Imports cases into the network store and exports networks back to case files, using PowSyBl importers/exporters. Indexes equipment in Elasticsearch and posts functional logs to the report-server during import. |
-| Case Server | [powsybl-case-server](https://github.com/powsybl/powsybl-case-server) | Stores and serves power network case files in any format supported by PowSyBl (CGMES, UCTE, XIIDM, Matpower, IEEE-CDF, …). Archives are extracted and sub-files stored compressed in S3. |
-| Geo Data Server | [geo-data-server](https://github.com/gridsuite/geo-data-server) | Manages geographical data (GPS coordinates) for substations and lines of a network. Computes missing substation positions with a centroid-based algorithm and falls back to default country-level positions. |
-| Cgmes Gl Server | [cgmes-gl-server](https://github.com/gridsuite/cgmes-gl-server) | Extracts geographical position data (substation and line positions) from CGMES cases' GL profile and pushes the extracted coordinates to the geo-data-server. |
-| Case Import Server | [case-import-server](https://github.com/gridsuite/case-import-server) | Provides a single REST endpoint to import a case file and automatically store it in a target directory of the GridSuite tree, based on the declared origin of the file, forwarding storage to case-server and directory-server. |
+| Report Server | [report-server](https://github.com/gridsuite/report-server) | Stores and serves hierarchical computation reports (`ReportNode` trees) produced by PowSyBl-based calculations. Exposes them back through REST endpoints for display in the front-end (full tree view, paginated logs, aggregated severities, search). |
+
+### Elements Directory With Permissions
+
+| Title | Repository | Description |
+|---|---|---|
+| Directory Server | [directory-server](https://github.com/gridsuite/directory-server) | Manages the hierarchical directory tree in which user resources (studies, filters, contingency lists, …) are organised, along with the access permissions (READ/WRITE/MANAGE) controlling who can browse or modify each directory. |
 
 ### Network Computation
 
@@ -89,7 +87,7 @@ Not all the micro-services are exposed to the outside world. Only a selected set
 | Dynamic Security Analysis Server | [dynamic-security-analysis-server](https://github.com/gridsuite/dynamic-security-analysis-server) | Extends a dynamic simulation result by evaluating the impact of a set of contingencies on top of its output state, using a Dynawo-based dynamic security analysis provider. |
 | Dynamic Margin Calculator Server | [dynamic-margin-calculation-server](https://github.com/gridsuite/dynamic-margin-calculation-server) | Evaluates, through successive load increases, the maximum load level a network can sustain before contingencies lead to a critical loss of stability, relying on the dynamic-simulation and dynamic-security-analysis servers. |
 
-### Network filtering and modification
+### Network Filtering And Modification
 
 | Title | Repository | Description |
 |---|---|---|
@@ -97,11 +95,37 @@ Not all the micro-services are exposed to the outside world. Only a selected set
 | Filter Server | [filter-server](https://github.com/gridsuite/filter-server) | Stores and instantiates filters (sets of network equipment), used to configure modifications, contingency lists, and to filter data in the UI. Evaluates filters against a network and returns matched equipment. |
 | Actions Server | [actions-server](https://github.com/gridsuite/actions-server) | Stores and instantiates contingency lists (identifier-based and filter-based), used by security and sensitivity analyses. Evaluates contingency lists against a network and exports them in PowSyBl JSON format. |
 
-### Elements directory with permissions
+### Network Storage
 
 | Title | Repository | Description |
 |---|---|---|
-| Directory Server | [directory-server](https://github.com/gridsuite/directory-server) | Manages the hierarchical directory tree in which user resources (studies, filters, contingency lists, …) are organised, along with the access permissions (READ/WRITE/MANAGE) controlling who can browse or modify each directory. |
+| Network Store Server | [powsybl-network-store-server](https://github.com/powsybl/powsybl-network-store-server) | Database-backed implementation of the PowSyBl Core Network API (IIDM model), persisting networks in PostgreSQL instead of in memory. Used together with the `network-store-client` library. |
+| Network Conversion Server | [powsybl-network-conversion-server](https://github.com/powsybl/powsybl-network-conversion-server) | Imports cases into the network store and exports networks back to case files, using PowSyBl importers/exporters. Indexes equipment in Elasticsearch and posts functional logs to the report-server during import. |
+| Case Server | [powsybl-case-server](https://github.com/powsybl/powsybl-case-server) | Stores and serves power network case files in any format supported by PowSyBl (CGMES, UCTE, XIIDM, Matpower, IEEE-CDF, …). Archives are extracted and sub-files stored compressed in S3. |
+| Geo Data Server | [geo-data-server](https://github.com/gridsuite/geo-data-server) | Manages geographical data (GPS coordinates) for substations and lines of a network. Computes missing substation positions with a centroid-based algorithm and falls back to default country-level positions. |
+| Cgmes Gl Server | [cgmes-gl-server](https://github.com/gridsuite/cgmes-gl-server) | Extracts geographical position data (substation and line positions) from CGMES cases' GL profile and pushes the extracted coordinates to the geo-data-server. |
+| Case Import Server | [case-import-server](https://github.com/gridsuite/case-import-server) | Provides a single REST endpoint to import a case file and automatically store it in a target directory of the GridSuite tree, based on the declared origin of the file, forwarding storage to case-server and directory-server. |
+
+
+### Technical Services
+
+| Title | Repository | Description |
+|---|---|---|
+| Gateway | [gateway](https://github.com/gridsuite/gateway) | Single entry point of the backend: reverse-proxies selected micro-services/endpoints under a dedicated path prefix, validates OIDC/OAuth2 tokens and injects the `userId`/`roles` headers trusted by downstream services, records connection attempts via **User Admin Server**, and blocks direct external access to supervision endpoints. |
+| User identity OIDC replication server | [user-identity-oidc-replication-server](https://github.com/gridsuite/user-identity-oidc-replication-server) | Used by front-ends to resolve a user's `sub` to a display name, without querying the identity provider directly. |
+
+### Time Series Storage
+
+| Title | Repository | Description |
+|---|---|---|
+| Timeseries Server | [timeseries-server](https://github.com/gridsuite/timeseries-server) | Generic, computation-agnostic storage for PowSyBl time series. Producers (e.g. dynamic-simulation-server) submit a batch of time series and get a group id; consumers later fetch the metadata or data, optionally filtered. |
+
+### UI Configuration
+
+| Title | Repository | Description |
+|---|---|---|
+| Config Server | [config-server](https://github.com/gridsuite/config-server) | Used by front-ends to persist per-user UI configuration parameters across machines and browsers. |
+| Config Notification Server | [config-notification-server](https://github.com/gridsuite/config-notification-server) | Pushes configuration update notifications and global announcements to front-ends via WebSocket. |
 
 ### UI Preparation
 
@@ -110,14 +134,3 @@ Not all the micro-services are exposed to the outside world. Only a selected set
 | Single Line Diagram Server | [powsybl-single-line-diagram-server](https://github.com/powsybl/powsybl-single-line-diagram-server) | Generates single-line diagrams (voltage level or substation) and network area diagrams (NAD) from a network stored in the network store, with automatic layout options. |
 | Network Map Server | [network-map-server](https://github.com/gridsuite/network-map-server) | Read-only projection layer between the PowSyBl IIDM model and the UI. Exposes network equipment at different levels of detail (`MAP`, `TOOLTIP`, `TAB`, `FORM`, `OPERATING_STATUS`) so each UI context only receives the data it needs. |
 
-### Business Logs
-
-| Title | Repository | Description |
-|---|---|---|
-| Report Server | [report-server](https://github.com/gridsuite/report-server) | Stores and serves hierarchical computation reports (`ReportNode` trees) produced by PowSyBl-based calculations. Exposes them back through REST endpoints for display in the front-end (full tree view, paginated logs, aggregated severities, search). |
-
-### Time Series Storage
-
-| Title | Repository | Description |
-|---|---|---|
-| Timeseries Server | [timeseries-server](https://github.com/gridsuite/timeseries-server) | Generic, computation-agnostic storage for PowSyBl time series. Producers (e.g. dynamic-simulation-server) submit a batch of time series and get a group id; consumers later fetch the metadata or data, optionally filtered. |
