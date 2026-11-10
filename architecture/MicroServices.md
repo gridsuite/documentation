@@ -52,6 +52,7 @@ Not all the micro-services are exposed to the outside world. Only a selected set
 |---|---|---|
 | Grid RT App | [gridrt-app](https://github.com/gridsuite/gridrt-app) | Front-end to manage the snapshot refiner process: configure and launch the process, monitor its status in real time, and view results and logs. Consumes the REST API exposed by the **Snapshot Refiner Server**. |
 | Snapshot Refiner Server | Not available yet | |
+| RT Notification Server | [rt-notification-server](https://github.com/gridsuite/rt-notification-server) | Pushes process execution updates to **Grid RT App** via WebSocket. |
 
 ### GridDyna
 
