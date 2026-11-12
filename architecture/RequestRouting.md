@@ -16,7 +16,7 @@ This can be represented as follows:
     - authentication checks
     - routing requests to the appropriate microservice based on the request URL.
 
-For example, if a request is made to `https://gridsuitedomain/gridexplore/api/gateway/explore/v1/explore/elements...`, the routing process would be as follows:
+For example, if a request is made to `https://gridsuitedomain/gridexplore/api/gateway/explore/v1/explore/elements...` from a front-end application, the routing process would be as follows:
 
 ![Request routing example diagram](diagrams/RequestRoutingExample.drawio.svg)
 
@@ -24,5 +24,8 @@ Note how the URL is progressively stripped as each routing prefix is consumed at
 
 In this example, SSL termination is done at the ingress controller, which then routes the request to the gridapp httpd server. Note that SSL termination can alternatively be handled by an external load balancer for example.
 
+An external application that needs to call an API endpoint should call the gateway directly, bypassing the gridapp httpd servers.
 
-A future improvement could be to route requests directly from the ingress controller to the gateway, bypassing the gridapp httpd servers. The gridapp httpd servers would then only serve static content.
+![Request routing example API diagram](diagrams/RequestRoutingExampleAPI.drawio.svg)
+
+A future improvement could be to route requests directly from the ingress controller to the gateway, bypassing the gridapp httpd servers for the frontends as well. The gridapp httpd servers would then only serve static content.
